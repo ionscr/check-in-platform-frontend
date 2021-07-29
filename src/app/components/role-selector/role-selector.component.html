@@ -1,0 +1,52 @@
+<h4>Select your role:</h4>
+<div
+  class="btn-group"
+  role="group"
+  aria-label="Basic radio toggle button group"
+>
+ <input
+    type="radio"
+    class="btn-check"
+    name="roleSelect"
+    id="roleSelect1"
+    autocomplete="off"
+    [(ngModel)]="role"
+    value="guest"
+    checked = "true"
+  /> 
+    
+  <label class="btn btn-outline-secondary" for="roleSelect1">Guest</label>
+
+  <input
+    type="radio"
+    class="btn-check"
+    name="roleSelect"
+    id="roleSelect2"
+    autocomplete="off"
+    [(ngModel)]="role"
+    value="student"
+  />
+  <label class="btn btn-outline-secondary" for="roleSelect2">Student</label>
+
+  <input
+    type="radio"
+    class="btn-check"
+    name="roleSelect"
+    id="roleSelect3"
+    autocomplete="off"
+    [(ngModel)]="role"
+    value="teacher"
+  />
+  <label class="btn btn-outline-secondary" for="roleSelect3">Teacher</label>
+
+  <input
+    type="radio"
+    class="btn-check"
+    name="roleSelect"
+    id="roleSelect4"
+    autocomplete="off"
+    [(ngModel)]="role"
+    value="admin"
+  />
+  <label class="btn btn-outline-secondary" for="roleSelect4">Admin</label>
+</div>

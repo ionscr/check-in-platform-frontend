@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { RoleSelectorComponent } from './components/role-selector/role-selector.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RoleSelectorComponent
+    RoleSelectorComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

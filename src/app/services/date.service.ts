@@ -7,6 +7,6 @@ export class DateService {
   currentDate: Date = new Date();
   constructor() { }
   getMonday(weekNr: number){
-    return  new Date(this.currentDate.setDate(this.currentDate.getDate() - this.currentDate.getDay()) + weekNr * 8);
+    return  new Date(this.currentDate.setDate(this.currentDate.getDate() - this.currentDate.getDay() + (this.currentDate.getDay() == 0 ? -6:1) + 7*weekNr));
   }
 }

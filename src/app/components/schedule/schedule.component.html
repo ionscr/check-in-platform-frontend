@@ -1,17 +1,14 @@
 <table class="table table-striped table-bordered">
     <tr>
     <th scope="row">08:00</th>
-    <td>asd</td>
-    <td>asd</td>
+    <td>{{monday}}</td>
+    <td>{{fMonday}}</td>
     <td>asd</td>
     <td>asd</td>
   </tr>
   <tr>
     <th scope="row">10:00</th>
-    <td>asd</td>
-    <td>asd</td>
-    <td>asd</td>
-    <td>asd</td>
+    <td *ngFor="let class of dayClasses">{{class | json}}</td>
   </tr>
   <tr>
     <th scope="row">12:00</th>

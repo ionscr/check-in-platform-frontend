@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { RoleSelectorComponent } from './components/role-selector/role-selector.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     RoleSelectorComponent,
-    CalendarComponent
+    CalendarComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,

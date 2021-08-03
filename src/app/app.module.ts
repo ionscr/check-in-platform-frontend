@@ -7,17 +7,25 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { RoleSelectorComponent } from './components/role-selector/role-selector.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ScheduleDayComponent } from './components/schedule-day/schedule-day.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RoleSelectorComponent
+    RoleSelectorComponent,
+    CalendarComponent,
+    ScheduleComponent,
+    ScheduleDayComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

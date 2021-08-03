@@ -3,4 +3,12 @@ table {
     word-wrap: break-word;
     text-align: center;
     vertical-align: middle;
+    margin-bottom: 0;
+}
+thead{
+    vertical-align: middle;
+
+}
+thead, tbody, tfoot, tr, td, th {
+    border-style: solid none solid none;
 }

@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { RoleSelectorComponent } from './components/role-selector/role-selector.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,8 +24,5 @@ export class ScheduleComponent implements OnInit {
     subscribe((dayClasses) => (this.dayClasses = dayClasses));
     console.log(this.daystring);
   }
-  toString(){
-    return JSON.stringify(this);
-  }
 
 }

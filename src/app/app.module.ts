@@ -10,13 +10,15 @@ import { RoleSelectorComponent } from './components/role-selector/role-selector.
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ScheduleDayComponent } from './components/schedule-day/schedule-day.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     RoleSelectorComponent,
     CalendarComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    ScheduleDayComponent
   ],
   imports: [
     BrowserModule,

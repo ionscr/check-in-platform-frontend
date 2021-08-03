@@ -1,2 +1,2 @@
-<p *ngFor="let class of dayClasses">{{class | json}}</p>
+<app-schedule-item *ngFor="let class of dayClasses | sort:'localTime'"></app-schedule-item>
 <p *ngIf="dayClasses.length==0">There are no classes for this day.</p>

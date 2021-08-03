@@ -10,7 +10,7 @@ import { RoleSelectorComponent } from './components/role-selector/role-selector.
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ScheduleDayComponent } from './components/schedule-day/schedule-day.component';
+import { ArraySortPipe, ScheduleDayComponent } from './components/schedule-day/schedule-day.component';
 import { ScheduleItemComponent } from './components/schedule-item/schedule-item.component';
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { ScheduleItemComponent } from './components/schedule-item/schedule-item.
     CalendarComponent,
     ScheduleComponent,
     ScheduleDayComponent,
-    ScheduleItemComponent
+    ScheduleItemComponent,
+    ArraySortPipe
   ],
   imports: [
     BrowserModule,

@@ -19,8 +19,8 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.monday = this.dateService.getMonday(this.weekNr);
-    this.fMonday = formatDate('2021-09-01','yyyy-MM-dd','en-US');
-    this.scheduleService.getSchedulesByDate('localDate='+'2021-09-01').
+    this.fMonday = formatDate(this.monday,'yyyy-MM-dd','en-US');
+    this.scheduleService.getSchedulesByDate('localDate='+ this.fMonday).
     subscribe((dayClasses) => (this.dayClasses = dayClasses));
     console.log(this.daystring);
   }

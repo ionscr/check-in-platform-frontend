@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DateService } from 'src/app/services/date.service';
-import { ScheduleService } from 'src/app/services/schedule.service';
-import { Schedule } from 'src/app/models/Schedule';
 import { formatDate } from '@angular/common';
-import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
@@ -12,17 +9,12 @@ import { JsonPipe } from '@angular/common';
 export class ScheduleComponent implements OnInit {
   @Input() weekNr = 0;
   monday: Date = new Date();
-  fMonday: string = "";
-  dayClasses: Schedule[] = [];
-  daystring: string = "";
-  constructor(private dateService: DateService, private scheduleService: ScheduleService) { }
+  week: string[] = [];
+  constructor(private dateService: DateService) { }
 
   ngOnInit(): void {
     this.monday = this.dateService.getMonday(this.weekNr);
-    this.fMonday = formatDate(this.monday,'yyyy-MM-dd','en-US');
-    this.scheduleService.getSchedulesByDate('localDate='+ this.fMonday).
-    subscribe((dayClasses) => (this.dayClasses = dayClasses));
-    console.log(this.daystring);
+    for(var i = 0;i < 5; i++) this.week.push(formatDate(this.dateService.addDays(this.monday,i),'yyyy-MM-dd','en-US'));
   }
 
 }

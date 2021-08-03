@@ -1,22 +1,6 @@
 <table class="table">
-    <tr>
-      week: {{weekNr}}
-  </tr>
   <tr>
-    <td *ngFor="let class of dayClasses">{{class | json}}</td>
+    <td style="width: 10%;">  </td>
+    <td *ngFor="let day of week"><app-schedule-day [today]="day"></app-schedule-day></td>
   </tr>
-  <tr>
-
-  </tr>
-  <tr>
-
-  </tr>
-  <tr>
-
-  </tr>
-  <tr>
- 
-  </tr>
-  <tr>
-
-  </tr></table>
+  </table>

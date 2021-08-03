@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DateService } from 'src/app/services/date.service';
 import { formatDate } from '@angular/common';
+import { faForward } from '@fortawesome/free-solid-svg-icons';
+import { faBackward } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-calendar',
@@ -9,17 +11,30 @@ import { formatDate } from '@angular/common';
 })
 export class CalendarComponent implements OnInit {
   weekNr: number = 0;
-  monday: Date = new Date();
-  friday: Date = new Date();
-  fMonday: string = "";
-  fFriday: string = "";
+  monday: string = "";
+  friday: string = "";
+  faForward = faForward;
+  faBackward = faBackward;
   constructor(private dateService: DateService) { }
 
   ngOnInit(): void {
-    this.monday = this.dateService.getMonday(this.weekNr);
-    this.friday = this.dateService.getFriday(this.weekNr);
-    this.fMonday = formatDate(this.monday,'dd.MM','en-US');
-    this.fFriday = formatDate(this.friday,'dd.MM','en-US');
+    this.monday = this.formatMonday();
+    this.friday = this.formatFriday();
   }
-
+  formatMonday(): string{
+    return formatDate(this.dateService.getMonday(this.weekNr),'dd.MM','en-US');
+  }
+  formatFriday(): string{
+    return formatDate(this.dateService.getFriday(this.weekNr),'dd.MM','en-US');
+  }
+  onForward(){
+    this.weekNr++;
+    this.monday = this.formatMonday();
+    this.friday = this.formatFriday();
+  }
+  onBackwards(){
+    this.weekNr--;
+    this.monday = this.formatMonday();
+    this.friday = this.formatFriday();
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { ScheduleService } from 'src/app/services/schedule.service';
+import { Schedule } from 'src/app/models/Schedule';
 @Component({
   selector: 'app-schedule-day',
   templateUrl: './schedule-day.component.html',
@@ -7,9 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ScheduleDayComponent implements OnInit {
   @Input() today: string = "";
-  constructor() { }
+  dayClasses: Schedule[] = [];
+  constructor(private scheduleService: ScheduleService) { }
 
   ngOnInit(): void {
+    this.scheduleService.getSchedulesByDate('localDate='+ this.today).
+    subscribe((dayClasses) => (this.dayClasses = dayClasses));
   }
 
 }

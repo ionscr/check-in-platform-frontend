@@ -11,6 +11,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ScheduleDayComponent } from './components/schedule-day/schedule-day.component';
+import { ScheduleItemComponent } from './components/schedule-item/schedule-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { ScheduleDayComponent } from './components/schedule-day/schedule-day.com
     RoleSelectorComponent,
     CalendarComponent,
     ScheduleComponent,
-    ScheduleDayComponent
+    ScheduleDayComponent,
+    ScheduleItemComponent
   ],
   imports: [
     BrowserModule,

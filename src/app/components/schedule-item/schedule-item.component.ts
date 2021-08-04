@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Reservations } from 'src/app/models/Reservations';
+import { Schedule } from 'src/app/models/Schedule';
+import { ReservationsService } from 'src/app/services/reservations.service';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-schedule-item',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScheduleItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() dayClass: Schedule;
+  reservations: Reservations[] = [];
+  capacity: number = 0;
+  constructor(private reservationsService: ReservationsService) { }
 
   ngOnInit(): void {
+    this.getReservations();
   }
-
+  getReservations(): void {
+    this.reservationsService.getReservations().pipe(
+      map(reservations => 
+        reservations.filter(reservation => reservation.schedule.id == this.dayClass.id))
+      ).subscribe((reservations) => (this.reservations = reservations, this.capacity = reservations.length));
+  }
 }

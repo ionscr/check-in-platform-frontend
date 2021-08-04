@@ -1,1 +1,13 @@
-<p>schedule-item works!</p>
+
+<div class="card">
+    <h5 class="card-header">{{dayClass.classn.name}}</h5>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Classroom : {{dayClass.classroom.name}} <br> {{dayClass.classroom.location}}</li>
+            <li class="list-group-item">Teacher : {{dayClass.classn.teacher.first_name}} {{dayClass.classn.teacher.last_name}}</li>
+            <li class="list-group-item">Capacity : {{capacity}}/{{dayClass.classroom.capacity}}</li>
+          </ul>
+    </div>
+  </div>
+  {{reservations | json}} <br> ---------------------------------- <br>
+  {{dayClass | json}}

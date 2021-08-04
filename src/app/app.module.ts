@@ -12,6 +12,7 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ArraySortPipe, ScheduleDayComponent } from './components/schedule-day/schedule-day.component';
 import { ScheduleItemComponent } from './components/schedule-item/schedule-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { ScheduleItemComponent } from './components/schedule-item/schedule-item.
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

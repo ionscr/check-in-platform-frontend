@@ -3,7 +3,7 @@ import { Reservations } from 'src/app/models/Reservations';
 import { Schedule } from 'src/app/models/Schedule';
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { map, filter } from 'rxjs/operators';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-schedule-item',
   templateUrl: './schedule-item.component.html',

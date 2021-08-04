@@ -3,7 +3,9 @@ import { Reservations } from 'src/app/models/Reservations';
 import { Schedule } from 'src/app/models/Schedule';
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { map, filter } from 'rxjs/operators';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { TemplateRef } from '@angular/core';
+
 @Component({
   selector: 'app-schedule-item',
   templateUrl: './schedule-item.component.html',
@@ -14,7 +16,7 @@ export class ScheduleItemComponent implements OnInit {
   @Input() dayClass: Schedule;
   reservations: Reservations[] = [];
   capacity: number = 0;
-  constructor(private reservationsService: ReservationsService) { }
+  constructor(private reservationsService: ReservationsService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.getReservations();
@@ -24,5 +26,8 @@ export class ScheduleItemComponent implements OnInit {
       map(reservations => 
         reservations.filter(reservation => reservation.schedule.id == this.dayClass.id))
       ).subscribe((reservations) => (this.reservations = reservations, this.capacity = reservations.length));
+  }
+  openModal(content: TemplateRef<any>): void {
+    this.modalService.open(content, { centered: true, size: 'lg' });
   }
 }

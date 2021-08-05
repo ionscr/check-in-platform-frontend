@@ -1,4 +1,3 @@
-
 <div class="card" (click)="openModal(content)">
     <h5 class="card-header">{{dayClass.classn.name}}</h5>
     <div class="card-body">
@@ -13,27 +12,54 @@
   {{dayClass | json}}
 
   <ng-template #content let-modal>
+    <div *ngIf="role=='guest'">
+        <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Class : {{dayClass.classn.name}}</h4>
+        <button type="button" class="close btn btn-outline-secondary" aria-label="Close" (click)="modal.dismiss()">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </div>
+      <div class="modal-body">
+        <b>Section:</b> {{dayClass.classn.section}} <br>
+        <b>Year:</b> {{dayClass.classn.year}} <br>
+        <b>Teacher:</b> {{dayClass.classn.teacher.first_name}} {{dayClass.classn.teacher.last_name}} <br>
+        <b>Classroom:</b> {{dayClass.classroom.name}} <i>at</i> {{dayClass.classroom.location}} <br>
+        <b>Capacity:</b> {{capacity}}/{{dayClass.classroom.capacity}}
+      </div>
+  </div>
+
+  <div *ngIf="role=='student'">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
+      <h4 class="modal-title" id="modal-basic-title">Class : {{dayClass.classn.name}}</h4>
+      <button type="button" class="close btn btn-outline-secondary" aria-label="Close" (click)="modal.dismiss()">
+        <fa-icon [icon]="faTimes"></fa-icon>
       </button>
     </div>
     <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="dateOfBirth">Date of birth</label>
-          <div class="input-group">
-            <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-            </div>
-          </div>
+      <b>Section:</b> {{dayClass.classn.section}} <br>
+      <b>Year:</b> {{dayClass.classn.year}} <br>
+      <b>Teacher:</b> {{dayClass.classn.teacher.first_name}} {{dayClass.classn.teacher.last_name}} <br>
+      <b>Classroom:</b> {{dayClass.classroom.name}} <i>at</i> {{dayClass.classroom.location}} <br>
+      <b>Capacity:</b> {{capacity}}/{{dayClass.classroom.capacity}}
+    </div>
+  <div class="modal-footer">
+    <div style="width: 100%;">
+       <b>Make a reservation:</b> <br>
+    <form>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="studentsSelect">Select student : </label>
         </div>
-      </form>
+        <select class="form-control" id="studentsSelect" aria-describedby="basic-addon3" name="studentSelect" [(ngModel)]="selectedStudent" required>
+          <option hidden>Choose here</option>
+          <option *ngFor="let student of students" [value]="student.id"> {{student.first_name}} {{student.last_name}}</option>
+        </select>
+      </div>
+    </form>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close()">Reserve</button>
+  </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div>
+   
+</div>
   </ng-template>
   

@@ -1,3 +1,6 @@
 .card{
     cursor:pointer;
 }
+.modal-footer{
+    justify-content: flex-start;
+}

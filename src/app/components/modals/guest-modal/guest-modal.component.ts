@@ -23,7 +23,6 @@ export class GuestModalComponent implements OnInit {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
   }
   ngOnDestroy(){
-    console.log("destroyt");
     this.eventsSubsription.unsubscribe();
   }
   openModal(content: TemplateRef<any>): void {

@@ -28,6 +28,10 @@ export class ScheduleItemComponent implements OnInit {
   faTimes = faTimes;
   studentOk: number = 1;
   guestEventSubject: Subject<void> = new Subject<void>();
+  studentEventSubject: Subject<void> = new Subject<void>();
+  teacherEventSubject: Subject<void> = new Subject<void>();
+  adminEventSubject: Subject<void> = new Subject<void>();
+
   constructor(private reservationsService: ReservationsService, private modalService: NgbModal, private roleService: RoleService, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -64,5 +68,6 @@ export class ScheduleItemComponent implements OnInit {
   callModal(){
     this.role = this.roleService.getRole();
     if(this.role == 'guest') this.guestEventSubject.next();
+    if(this.role == 'student') this.studentEventSubject.next();
   }
 }

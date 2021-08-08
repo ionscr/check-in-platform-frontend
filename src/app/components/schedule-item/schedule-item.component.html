@@ -1,4 +1,4 @@
-<div class="card" (click)="openModal(content)">
+<div class="card" (click)="callModal()">
     <h5 class="card-header">{{dayClass.classn.name}}</h5>
     <div class="card-body">
         <ul class="list-group list-group-flush">
@@ -11,9 +11,9 @@
   </div>
   <!--{{reservations | json}} <br> ---------------------------------- <br>
   {{dayClass | json}} -->
-
+  <app-guest-modal [dayClass]="dayClass" [capacity]="capacity" [events]="guestEventSubject.asObservable()"></app-guest-modal>
   <ng-template #content let-modal>
-    <div *ngIf="role=='guest'">
+    <div *ngIf="role=='guest12'">
         <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Class : {{dayClass.classn.name}}</h4>
         <button type="button" class="close btn btn-outline-secondary" aria-label="Close" (click)="modal.dismiss()">

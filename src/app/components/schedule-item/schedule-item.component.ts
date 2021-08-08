@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Reservations } from 'src/app/models/Reservations';
 import { Schedule } from 'src/app/models/Schedule';
 import { User } from 'src/app/models/User';
@@ -11,6 +11,7 @@ import { map, filter } from 'rxjs/operators';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { TemplateRef } from '@angular/core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-schedule-item',
@@ -26,6 +27,7 @@ export class ScheduleItemComponent implements OnInit {
   capacity: number = 0;
   faTimes = faTimes;
   studentOk: number = 1;
+  guestEventSubject: Subject<void> = new Subject<void>();
   constructor(private reservationsService: ReservationsService, private modalService: NgbModal, private roleService: RoleService, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -58,5 +60,9 @@ export class ScheduleItemComponent implements OnInit {
     this.role = this.roleService.getRole();
     this.getStudents();
     this.modalService.open(content, { centered: true }).result.then(() => { this.addReservation(this.selectedStudent); }, () => {})
+  }
+  callModal(){
+    this.role = this.roleService.getRole();
+    if(this.role == 'guest') this.guestEventSubject.next();
   }
 }

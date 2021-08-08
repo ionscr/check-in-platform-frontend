@@ -69,5 +69,6 @@ export class ScheduleItemComponent implements OnInit {
     this.role = this.roleService.getRole();
     if(this.role == 'guest') this.guestEventSubject.next();
     if(this.role == 'student') this.studentEventSubject.next();
+    if(this.role == 'teacher') this.teacherEventSubject.next();
   }
 }

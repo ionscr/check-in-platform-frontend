@@ -15,6 +15,7 @@ import { ScheduleItemComponent } from './components/schedule-item/schedule-item.
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GuestModalComponent } from './components/modals/guest-modal/guest-modal.component';
 import { StudentModalComponent } from './components/modals/student-modal/student-modal.component';
+import { TeacherModalComponent } from './components/modals/teacher-modal/teacher-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { StudentModalComponent } from './components/modals/student-modal/student
     ScheduleItemComponent,
     ArraySortPipe,
     GuestModalComponent,
-    StudentModalComponent
+    StudentModalComponent,
+    TeacherModalComponent
   ],
   imports: [
     BrowserModule,

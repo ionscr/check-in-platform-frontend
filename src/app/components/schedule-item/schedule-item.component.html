@@ -13,5 +13,5 @@
   {{dayClass | json}} -->
   <app-guest-modal [dayClass]="dayClass" [capacity]="capacity" [events]="guestEventSubject.asObservable()"></app-guest-modal>
   <app-student-modal [dayClass]="dayClass" [capacity]="capacity" [reservations]="reservations" [events]="studentEventSubject.asObservable()"></app-student-modal>
-
+  <app-teacher-modal [dayClass]="dayClass" [capacity]="capacity" [reservations]="reservations" [events]="teacherEventSubject.asObservable()"></app-teacher-modal>
   

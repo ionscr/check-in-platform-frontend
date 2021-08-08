@@ -13,12 +13,11 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-student-modal',
-  templateUrl: './student-modal.component.html',
-  styleUrls: ['./student-modal.component.css']
+  selector: 'app-teacher-modal',
+  templateUrl: './teacher-modal.component.html',
+  styleUrls: ['./teacher-modal.component.css']
 })
-
-export class StudentModalComponent implements OnInit {
+export class TeacherModalComponent implements OnInit {
   @Input() dayClass!: Schedule;
   @Input() capacity: number = 0;
   @Input() events: Observable<void>;
@@ -59,4 +58,5 @@ export class StudentModalComponent implements OnInit {
       alert("This student already has a reservation!");
     }
   }
+
 }

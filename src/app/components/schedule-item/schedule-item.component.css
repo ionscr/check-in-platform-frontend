@@ -4,3 +4,6 @@
 .modal-footer{
     justify-content: flex-start;
 }
+.max-width{
+    width: 100%;
+}

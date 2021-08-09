@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GuestModalComponent } from './components/modals/guest-modal/guest-modal.component';
 import { StudentModalComponent } from './components/modals/student-modal/student-modal.component';
 import { TeacherModalComponent } from './components/modals/teacher-modal/teacher-modal.component';
+import { AdminModalComponent } from './components/modals/admin-modal/admin-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { TeacherModalComponent } from './components/modals/teacher-modal/teacher
     ArraySortPipe,
     GuestModalComponent,
     StudentModalComponent,
-    TeacherModalComponent
+    TeacherModalComponent,
+    AdminModalComponent
   ],
   imports: [
     BrowserModule,

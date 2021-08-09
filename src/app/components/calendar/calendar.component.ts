@@ -22,6 +22,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.monday = this.formatMonday();
     this.friday = this.formatFriday();
+    this.roleService.roleChange.subscribe(value => {this.role = value})
   }
   formatMonday(): string{
     return formatDate(this.dateService.getMonday(this.weekNr),'dd.MM','en-US');

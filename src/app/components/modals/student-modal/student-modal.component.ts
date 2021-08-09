@@ -6,6 +6,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Schedule } from 'src/app/models/Schedule';
 import { User } from 'src/app/models/User';
 import { Reservations } from 'src/app/models/Reservations';
+import { Feature } from 'src/app/models/Feature';
 
 import { UserService } from 'src/app/services/user.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
@@ -23,6 +24,7 @@ export class StudentModalComponent implements OnInit {
   @Input() capacity: number = 0;
   @Input() events: Observable<void>;
   @Input() reservations: Reservations[] = [];
+  @Input() features: Feature[] = [];
   @Output() newReservationEvent = new EventEmitter<number>(); 
   @ViewChild('content') private content: TemplateRef<any>;
   private eventsSubsription: Subscription;

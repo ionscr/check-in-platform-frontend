@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Reservations } from 'src/app/models/Reservations';
 import { Schedule } from 'src/app/models/Schedule';
+import { Feature } from 'src/app/models/Feature';
 
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { RoleService } from 'src/app/services/role.service';
-import { UserService } from 'src/app/services/user.service';
+import { FeatureService } from 'src/app/services/feature.service';
 
 import { map } from 'rxjs/operators';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
 
@@ -19,6 +19,7 @@ import { Subject } from 'rxjs';
 export class ScheduleItemComponent implements OnInit {
   @Input() dayClass!: Schedule;
   reservations: Reservations[] = [];
+  features: Feature[] = [];
   role: string = "";
   capacity: number = 0;
   faTimes = faTimes;
@@ -27,16 +28,24 @@ export class ScheduleItemComponent implements OnInit {
   teacherEventSubject: Subject<void> = new Subject<void>();
   adminEventSubject: Subject<void> = new Subject<void>();
 
-  constructor(private reservationsService: ReservationsService, private modalService: NgbModal, private roleService: RoleService, private userService: UserService) { }
+  constructor(private reservationsService: ReservationsService, private roleService: RoleService, private featureService: FeatureService
+    ) { }
 
   ngOnInit(): void {
     this.getReservations();
+    this.getFeatures();
   }
   getReservations(): void {
     this.reservationsService.getReservations().pipe(
       map(reservations => 
         reservations.filter(reservation => reservation.schedule.id == this.dayClass.id))
       ).subscribe((reservations) => (this.reservations = reservations, this.capacity = reservations.length));
+  }
+  getFeatures(): void {
+    this.featureService.getFeatures().pipe(
+      map(features => 
+        features.filter(feature => feature.classroom.id == this.dayClass.classroom.id))
+    ).subscribe((features) => (this.features = features));
   }
   updateReservations(): void{
     this.reservationsService.getReservations().subscribe((reservations) => (this.reservations = reservations));

@@ -4,6 +4,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subscription } from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { TemplateRef } from '@angular/core';
+import { Feature } from 'src/app/models/Feature';
 
 @Component({
   selector: 'app-guest-modal',
@@ -14,6 +15,7 @@ export class GuestModalComponent implements OnInit {
   @Input() dayClass!: Schedule;
   @Input() capacity: number = 0;
   @Input() events: Observable<void>;
+  @Input() features: Feature[] = [];
   @ViewChild('content') private content: TemplateRef<any>;
   private eventsSubsription: Subscription;
   faTimes=faTimes;

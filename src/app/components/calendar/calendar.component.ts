@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DateService } from 'src/app/services/date.service';
 import { formatDate } from '@angular/common';
+
+import { DateService } from 'src/app/services/date.service';
+import { RoleService } from 'src/app/services/role.service';
+
 import { faForward } from '@fortawesome/free-solid-svg-icons';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
-import { RoleService } from 'src/app/services/role.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-calendar',
@@ -17,6 +20,7 @@ export class CalendarComponent implements OnInit {
   role: string = "";
   faForward = faForward;
   faBackward = faBackward;
+  faPlus = faPlus;
   constructor(private dateService: DateService, private roleService: RoleService) { }
 
   ngOnInit(): void {
@@ -39,5 +43,8 @@ export class CalendarComponent implements OnInit {
     this.weekNr--;
     this.monday = this.formatMonday();
     this.friday = this.formatFriday();
+  }
+  onPlus(day: number){
+
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Reservations } from 'src/app/models/Reservations';
 import { Schedule } from 'src/app/models/Schedule';
-import { User } from 'src/app/models/User';
 
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { RoleService } from 'src/app/services/role.service';
@@ -39,10 +38,15 @@ export class ScheduleItemComponent implements OnInit {
         reservations.filter(reservation => reservation.schedule.id == this.dayClass.id))
       ).subscribe((reservations) => (this.reservations = reservations, this.capacity = reservations.length));
   }
+  updateReservations(): void{
+    this.reservationsService.getReservations().subscribe((reservations) => (this.reservations = reservations));
+    this.getReservations();
+  }
   callModal(){
     this.role = this.roleService.getRole();
     if(this.role == 'guest') this.guestEventSubject.next();
     if(this.role == 'student') this.studentEventSubject.next();
     if(this.role == 'teacher') this.teacherEventSubject.next();
+    if(this.role == 'admin') this.adminEventSubject.next();
   }
 }

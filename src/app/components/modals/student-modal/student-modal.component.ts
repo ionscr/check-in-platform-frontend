@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -23,6 +23,7 @@ export class StudentModalComponent implements OnInit {
   @Input() capacity: number = 0;
   @Input() events: Observable<void>;
   @Input() reservations: Reservations[] = [];
+  @Output() newReservationEvent = new EventEmitter<number>(); 
   @ViewChild('content') private content: TemplateRef<any>;
   private eventsSubsription: Subscription;
   selectedStudent!: User;
@@ -46,17 +47,24 @@ export class StudentModalComponent implements OnInit {
     this.userService.findUsersByRole(1).subscribe((students) => (this.students = students));
   }
   addReservation(student: User): void{
-    this.studentOk = 1;
-    const student1: User = {id: Number(JSON.stringify(student).match(/\d/g)), first_name: "", last_name: "", role: 1};
-    this.reservations.forEach(reservation => {
-      if(reservation.student.id === student1.id) this.studentOk = 0;
-    });
-    if(this.studentOk){
-      const reservation: Reservations = {schedule: this.dayClass, student: student1}
-      this.reservationsService.addReservation(reservation).subscribe((reservation) => (this.reservations.push(reservation), this.capacity = this.reservations.length));
-    }
+    if(this.capacity == this.dayClass.classroom.capacity){
+      alert("This classroom is at full capacity!");
+    } 
     else{
-      alert("This student already has a reservation!");
+      this.studentOk = 1;
+      const student1: User = {id: Number(JSON.stringify(student).match(/\d/g)), first_name: "", last_name: "", role: 1};
+      this.reservations.forEach(reservation => {
+        if(reservation.student.id === student1.id) this.studentOk = 0;
+      });
+      if(this.studentOk){
+        const reservation: Reservations = {schedule: this.dayClass, student: student1}
+        this.reservationsService.addReservation(reservation).subscribe((reservation) => (this.reservations.push(reservation), this.capacity = this.reservations.length));
+        this.newReservationEvent.emit(1);
+      }
+      else{
+        alert("This student already has a reservation!");
+      }
     }
   }
+
 }

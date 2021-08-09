@@ -12,6 +12,6 @@
   <!--{{reservations | json}} <br> ---------------------------------- <br>
   {{dayClass | json}} -->
   <app-guest-modal [dayClass]="dayClass" [capacity]="capacity" [events]="guestEventSubject.asObservable()"></app-guest-modal>
-  <app-student-modal [dayClass]="dayClass" [capacity]="capacity" [reservations]="reservations" [events]="studentEventSubject.asObservable()"></app-student-modal>
-  <app-teacher-modal [dayClass]="dayClass" [capacity]="capacity" [reservations]="reservations" [events]="teacherEventSubject.asObservable()"></app-teacher-modal>
-  
+  <app-student-modal [dayClass]="dayClass" [capacity]="capacity" [reservations]="reservations" [events]="studentEventSubject.asObservable()" (newReservationEvent)="getReservations()"></app-student-modal>
+  <app-teacher-modal [dayClass]="dayClass" [capacity]="capacity" [reservations]="reservations" [events]="teacherEventSubject.asObservable()" (reservationEvent)="updateReservations()"></app-teacher-modal>
+  <app-admin-modal [dayClass]="dayClass" [capacity]="capacity" [reservations]="reservations" [events]="adminEventSubject.asObservable()"></app-admin-modal>

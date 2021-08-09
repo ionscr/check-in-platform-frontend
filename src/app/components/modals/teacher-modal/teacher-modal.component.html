@@ -27,7 +27,25 @@
         </select>
       </div>
     </form>
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.close()">Reserve</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close(1)">Reserve</button>
+  </div>
+    </div>
+
+  <div class="modal-footer">
+    <div class= "max-width">
+       <b>Delete a reservation:</b> <br>
+    <form>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="reservationSelect">Select reservation : </label>
+        </div>
+        <select class="form-control" id="reservationSelect" aria-describedby="basic-addon3" name="reservationSelect" [(ngModel)]="selectedReservation" required>
+          <option hidden>Choose here</option>
+          <option *ngFor="let reservation of reservations" [value]="reservation.id"> {{reservation.student.first_name}} {{reservation.student.last_name}}</option>
+        </select>
+      </div>
+    </form>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close(2)">Delete</button>
   </div>
     </div>
 </ng-template>

@@ -10,7 +10,14 @@ import { RoleSelectorComponent } from './components/role-selector/role-selector.
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ScheduleDayComponent } from './components/schedule-day/schedule-day.component';
+import { ArraySortPipe, ScheduleDayComponent } from './components/schedule-day/schedule-day.component';
+import { ScheduleItemComponent } from './components/schedule-item/schedule-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GuestModalComponent } from './components/modals/guest-modal/guest-modal.component';
+import { StudentModalComponent } from './components/modals/student-modal/student-modal.component';
+import { TeacherModalComponent } from './components/modals/teacher-modal/teacher-modal.component';
+import { AdminModalComponent } from './components/modals/admin-modal/admin-modal.component';
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,14 +25,22 @@ import { ScheduleDayComponent } from './components/schedule-day/schedule-day.com
     RoleSelectorComponent,
     CalendarComponent,
     ScheduleComponent,
-    ScheduleDayComponent
+    ScheduleDayComponent,
+    ScheduleItemComponent,
+    ArraySortPipe,
+    GuestModalComponent,
+    StudentModalComponent,
+    TeacherModalComponent,
+    AdminModalComponent,
+    FilterPipePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

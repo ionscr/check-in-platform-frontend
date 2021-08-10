@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RoleService } from 'src/app/services/role.service';
+
 @Component({
   selector: 'app-role-selector',
   templateUrl: './role-selector.component.html',
@@ -6,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoleSelectorComponent implements OnInit {
   role: string = "guest";
-  constructor() { }
+  constructor(private roleService: RoleService) { }
 
   ngOnInit(): void {
+    this.roleService.setRole(this.role);
+  }
+  onChange(): void{
+    this.roleService.setRole(this.role);
   }
 }

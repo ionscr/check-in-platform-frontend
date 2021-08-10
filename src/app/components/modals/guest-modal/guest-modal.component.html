@@ -1,0 +1,17 @@
+<ng-template #content let-modal>
+        <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Class : {{dayClass.classn.name}}</h4>
+        <button type="button" class="close btn btn-outline-secondary" aria-label="Close" (click)="modal.dismiss()">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </div>
+      <div class="modal-body">
+        <b>Hour:</b> {{dayClass.localTime.slice(0,5)}} <br>
+        <b>Section:</b> {{dayClass.classn.section}} <br>
+        <b>Year:</b> {{dayClass.classn.year}} <br>
+        <b>Teacher:</b> {{dayClass.classn.teacher.first_name}} {{dayClass.classn.teacher.last_name}} <br>
+        <b>Classroom:</b> {{dayClass.classroom.name}} <i>at</i> {{dayClass.classroom.location}} <br>
+        <b>Features:</b><button type="button" class="btn btn-outline-secondary btn-sm feature-btn" disabled *ngFor="let feature of features"> {{feature.feature}} </button> <br>
+        <b>Capacity:</b> {{capacity}}/{{dayClass.classroom.capacity}}
+      </div>
+</ng-template>

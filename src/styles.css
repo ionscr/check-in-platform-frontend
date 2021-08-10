@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.feature-btn{
+    margin-left: 5px;
+    margin-right: 5px;
+    color: black !important;
+}
+.label-prepend{
+    border: 0 !important;
+    background: transparent !important;
+    padding: 0.5rem 1rem 0.5rem 0 !important;
+}

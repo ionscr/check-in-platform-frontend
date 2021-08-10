@@ -1,0 +1,9 @@
+.modal-footer{
+    justify-content: flex-start;
+}
+.max-width{
+    width: 100%;
+}
+.modal-header{
+    justify-content: flex-end;
+}

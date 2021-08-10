@@ -12,3 +12,12 @@ thead{
 thead, tbody, tfoot, tr, td, th {
     border-style: solid none solid none;
 }
+.width10{
+    width: 10%;
+}
+.width18{
+    width: 18%;
+}
+.margin15{
+    margin-right: 15px;
+}

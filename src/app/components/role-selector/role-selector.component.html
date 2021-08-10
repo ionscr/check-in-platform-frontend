@@ -13,6 +13,7 @@
     [(ngModel)]="role"
     value="guest"
     checked = "true"
+    (change)="onChange()"
   /> 
     
   <label class="btn btn-outline-secondary" for="roleSelect1">Guest</label>
@@ -25,6 +26,7 @@
     autocomplete="off"
     [(ngModel)]="role"
     value="student"
+    (change)="onChange()"
   />
   <label class="btn btn-outline-secondary" for="roleSelect2">Student</label>
 
@@ -36,6 +38,7 @@
     autocomplete="off"
     [(ngModel)]="role"
     value="teacher"
+    (change)="onChange()"
   />
   <label class="btn btn-outline-secondary" for="roleSelect3">Teacher</label>
 
@@ -47,6 +50,7 @@
     autocomplete="off"
     [(ngModel)]="role"
     value="admin"
+    (change)="onChange()"
   />
   <label class="btn btn-outline-secondary" for="roleSelect4">Admin</label>
 </div>

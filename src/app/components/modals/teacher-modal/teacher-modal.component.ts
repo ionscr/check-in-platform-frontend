@@ -14,6 +14,8 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ClassroomService } from 'src/app/services/classroom.service';
+import { ClassService } from 'src/app/services/class.service';
+import { ScheduleService } from 'src/app/services/schedule.service';
 
 @Component({
   selector: 'app-teacher-modal',
@@ -40,7 +42,7 @@ export class TeacherModalComponent implements OnInit {
   edit: boolean = false;
   class_name: string = "";
 
-  constructor(private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService, private classroomService: ClassroomService) { }
+  constructor(private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService, private classroomService: ClassroomService, private classService: ClassService, private scheduleService: ScheduleService) { }
 
   ngOnInit(): void {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
@@ -91,6 +93,10 @@ export class TeacherModalComponent implements OnInit {
   }
   onSave(){
     this.edit = !this.edit;
+    this.dayClass.classn.name = this.class_name;
+    this.dayClass.classroom = this.selectedClassroom;
+    this.classService.updateClass(this.dayClass.classn).subscribe();
+    this.scheduleService.updateSchedule(this.dayClass).subscribe();
   }
   filterClassrooms(): Classroom[] {
     return this.classrooms.filter(classroom => classroom.id != this.dayClass.classroom.id);

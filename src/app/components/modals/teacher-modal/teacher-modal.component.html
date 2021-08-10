@@ -14,14 +14,14 @@
       <div class="input-group input-group-lg">
         <div class="input-group-prepend input-group-lg">
           <label class="input-group-text label-prepend" for="class"
-            ><b>Class:</b> 
+            ><b>Class:</b>
           </label>
         </div>
         <input
           [readonly]="!edit"
           [(ngModel)]="class_name"
           type="text"
-          class="form-control form-control-plaintext"
+          class="form-control"
           id="class"
           name="class"
           aria-describedby="inputGroup-sizing-lg"
@@ -42,7 +42,7 @@
           </label>
         </div>
         <select
-          [disabled] = "!edit"
+          [disabled]="!edit"
           class="form-control"
           id="classroomSelect"
           aria-describedby="basic-addon3"
@@ -52,19 +52,18 @@
         >
           <option [value]="dayClass.classroom">
             {{ dayClass.classroom.name }} <i>at</i>
-            {{ dayClass.classroom.location }} 
+            {{ dayClass.classroom.location }}
           </option>
           <option
             *ngFor="let classroom of filteredClassrooms"
             [value]="classroom.id"
-          >{{ classroom.name }} <i>at</i>
-          {{ classroom.location }} 
+          >
+            {{ classroom.name }} <i>at</i>
+            {{ classroom.location }}
           </option>
         </select>
       </div>
     </form>
-    <b>Classroom:</b> {{ dayClass.classroom.name }} <i>at</i>
-    {{ dayClass.classroom.location }} <br />
     <b>Features:</b
     ><button
       type="button"
@@ -91,6 +90,14 @@
       (click)="onSave()"
     >
       Save
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      *ngIf="edit"
+      (click)="onEdit()"
+    >
+     Cancel
     </button>
   </div>
   <div class="modal-footer">

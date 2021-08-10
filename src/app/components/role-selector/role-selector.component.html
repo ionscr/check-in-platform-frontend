@@ -54,3 +54,6 @@
   />
   <label class="btn btn-outline-secondary" for="roleSelect4">Admin</label>
 </div>
+<br>
+<button type="button" *ngIf="role=='teacher' || role=='admin'" (click)="onAddSchedule()" class="btn btn-outline-secondary margin15">Add new schedule item</button> 
+<app-new-schedule-modal *ngIf="role=='teacher' || role=='admin'" [events]="newScheduleEventSubject.asObservable()"></app-new-schedule-modal>

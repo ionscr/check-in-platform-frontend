@@ -34,6 +34,7 @@ export class TeacherModalComponent implements OnInit {
   selectedReservation!: Reservations;
   selectedClassroom!: Classroom;
   classrooms: Classroom[] = [];
+  filteredClassrooms: Classroom[] = [];
   faTimes=faTimes;
   studentOk: number = 1;
   edit: boolean = false;
@@ -53,6 +54,7 @@ export class TeacherModalComponent implements OnInit {
     this.class_name = this.dayClass.classn.name;
     this.selectedClassroom = this.dayClass.classroom;
     this.edit = false;
+    this.filteredClassrooms = this.filterClassrooms();
     this.modalService.open(content, { centered: true }).result.then( (value) => {if( value == 1) this.addReservation(this.selectedStudent); else if( value== 2) this.deleteReservation(this.selectedReservation); }, () => {});
   }
   getStudents(): void {
@@ -70,7 +72,6 @@ export class TeacherModalComponent implements OnInit {
     } 
     else{
       this.studentOk = 1;
-      console.log(" add id = " + Number(JSON.stringify(student).match(/\d/g)));
       const student1: User = {id: Number(JSON.stringify(student).match(/\d/g)), first_name: "", last_name: "", role: 1};
       this.reservations.forEach(reservation => {
         if(reservation.student.id === student1.id) this.studentOk = 0;
@@ -89,7 +90,9 @@ export class TeacherModalComponent implements OnInit {
     this.edit = !this.edit;
   }
   onSave(){
-
     this.edit = !this.edit;
+  }
+  filterClassrooms(): Classroom[] {
+    return this.classrooms.filter(classroom => classroom.id != this.dayClass.classroom.id);
   }
 }

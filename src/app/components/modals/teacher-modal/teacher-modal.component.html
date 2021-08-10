@@ -42,6 +42,7 @@
           </label>
         </div>
         <select
+          [disabled] = "!edit"
           class="form-control"
           id="classroomSelect"
           aria-describedby="basic-addon3"
@@ -54,11 +55,10 @@
             {{ dayClass.classroom.location }} 
           </option>
           <option
-            *ngFor="let classroom of classrooms"
+            *ngFor="let classroom of filteredClassrooms"
             [value]="classroom.id"
           >{{ classroom.name }} <i>at</i>
           {{ classroom.location }} 
-            
           </option>
         </select>
       </div>

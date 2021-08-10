@@ -17,6 +17,7 @@ import { GuestModalComponent } from './components/modals/guest-modal/guest-modal
 import { StudentModalComponent } from './components/modals/student-modal/student-modal.component';
 import { TeacherModalComponent } from './components/modals/teacher-modal/teacher-modal.component';
 import { AdminModalComponent } from './components/modals/admin-modal/admin-modal.component';
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { AdminModalComponent } from './components/modals/admin-modal/admin-modal
     GuestModalComponent,
     StudentModalComponent,
     TeacherModalComponent,
-    AdminModalComponent
+    AdminModalComponent,
+    FilterPipePipe
   ],
   imports: [
     BrowserModule,

@@ -7,11 +7,13 @@ import { Schedule } from 'src/app/models/Schedule';
 import { User } from 'src/app/models/User';
 import { Reservations } from 'src/app/models/Reservations';
 import { Feature } from 'src/app/models/Feature';
+import { Classroom } from 'src/app/models/Classroom';
 
 import { UserService } from 'src/app/services/user.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { ClassroomService } from 'src/app/services/classroom.service';
 
 @Component({
   selector: 'app-teacher-modal',
@@ -30,23 +32,34 @@ export class TeacherModalComponent implements OnInit {
   selectedStudent!: User;
   students: User[] = [];
   selectedReservation!: Reservations;
+  selectedClassroom!: Classroom;
+  classrooms: Classroom[] = [];
   faTimes=faTimes;
   studentOk: number = 1;
+  edit: boolean = false;
+  class_name: string = "";
 
-  constructor(private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService) { }
+  constructor(private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService, private classroomService: ClassroomService) { }
 
   ngOnInit(): void {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
     this.getStudents();
+    this.getClassrooms();
   }
   ngOnDestroy(){
     this.eventsSubsription.unsubscribe();
   }
   openModal(content: TemplateRef<any>): void {
+    this.class_name = this.dayClass.classn.name;
+    this.selectedClassroom = this.dayClass.classroom;
+    this.edit = false;
     this.modalService.open(content, { centered: true }).result.then( (value) => {if( value == 1) this.addReservation(this.selectedStudent); else if( value== 2) this.deleteReservation(this.selectedReservation); }, () => {});
   }
   getStudents(): void {
     this.userService.findUsersByRole(1).subscribe((students) => (this.students = students));
+  }
+  getClassrooms(): void{
+    this.classroomService.getClassrooms().subscribe((classrooms) => (this.classrooms = classrooms));
   }
   deleteReservation(reservation: Reservations): void{
     this.reservationsService.deleteReservation(Number(reservation)).subscribe(() => (this.reservationEvent.emit(1)));
@@ -72,5 +85,11 @@ export class TeacherModalComponent implements OnInit {
       }
     }
   }
+  onEdit(){
+    this.edit = !this.edit;
+  }
+  onSave(){
 
+    this.edit = !this.edit;
+  }
 }

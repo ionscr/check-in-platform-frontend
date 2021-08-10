@@ -4,3 +4,8 @@
     margin-right: 5px;
     color: black !important;
 }
+.label-prepend{
+    border: 0 !important;
+    background: transparent !important;
+    padding: 0.5rem 1rem 0.5rem 0 !important;
+}

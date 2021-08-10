@@ -19,6 +19,7 @@ import {
 import { DateService } from 'src/app/services/date.service';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { Schedule } from 'src/app/models/Schedule';
+import { RefreshService } from 'src/app/services/refresh.service';
 
 @Component({
   selector: 'app-new-schedule-modal',
@@ -40,7 +41,7 @@ export class NewScheduleModalComponent implements OnInit {
   time: NgbTimeStruct = {hour: 12, minute: 30, second: 0};
   faCalendarDay=faCalendarDay;
 
-  constructor(private scheduleService: ScheduleService ,private dateService: DateService ,private config: NgbInputDatepickerConfig, private calendar: NgbCalendar,private modalService: NgbModal, private classService: ClassService, private classroomService: ClassroomService) {
+  constructor(private refreshService: RefreshService ,private scheduleService: ScheduleService ,private dateService: DateService ,private config: NgbInputDatepickerConfig, private calendar: NgbCalendar,private modalService: NgbModal, private classService: ClassService, private classroomService: ClassroomService) {
     config.minDate = {year: 1900, month: 1, day: 1};
     config.maxDate = {year: 2099, month: 12, day: 31};
     config.outsideDays = 'hidden';
@@ -76,5 +77,6 @@ export class NewScheduleModalComponent implements OnInit {
     var time: string = hour + ":" + minute + ":00";
     const schedule: Schedule = {localDate: date, localTime: time, classn: this.selectedClass, classroom: this.selectedClassroom};
     this.scheduleService.addSchedule(schedule).subscribe();
+    this.refreshService.setRefresh(1);
   }
 }

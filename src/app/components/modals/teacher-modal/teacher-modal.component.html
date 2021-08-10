@@ -1,5 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit schedule</h4>
     <button
       type="button"
       class="close btn btn-outline-secondary"
@@ -133,9 +134,6 @@
         Reserve
       </button>
     </div>
-  </div>
-
-  <div class="modal-footer">
     <div class="max-width">
       <b>Delete a reservation:</b> <br />
       <form>
@@ -172,5 +170,15 @@
         Delete
       </button>
     </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+    type="button"
+    class="btn btn-outline-danger"
+    (click)="modal.close(3)"
+  >
+    Delete schedule item
+  </button>
   </div>
 </ng-template>

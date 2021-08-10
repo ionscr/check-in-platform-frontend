@@ -23,3 +23,7 @@
     overflow-x: auto;
   overflow-y: hidden;
 }
+td{
+    padding: 20px;
+    vertical-align: top;
+}

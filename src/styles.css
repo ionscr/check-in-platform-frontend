@@ -16,3 +16,6 @@
     height: 100%;
     border-radius: 0 0.5rem 0.5rem 0 !important;
 }
+.card{
+    margin-bottom:20px;
+}

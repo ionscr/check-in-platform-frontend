@@ -9,6 +9,9 @@ import { Subject } from 'rxjs';
 })
 export class RoleSelectorComponent implements OnInit {
   newScheduleEventSubject: Subject<void> = new Subject<void>();
+  newUserEventSubject: Subject<void> = new Subject<void>();
+  newClassEventSubject: Subject<void> = new Subject<void>();
+  newClassroomEventSubject: Subject<void> = new Subject<void>();
   role: string = "guest";
   constructor(private roleService: RoleService) { }
 
@@ -20,5 +23,14 @@ export class RoleSelectorComponent implements OnInit {
   }
   onAddSchedule(): void {
     this.newScheduleEventSubject.next();
+  }
+  onAddClass(): void {
+    this.newClassEventSubject.next();
+  }
+  onAddUser(): void {
+    this.newUserEventSubject.next();
+  }
+  onAddClassroom(): void {
+    this.newClassroomEventSubject.next();
   }
 }

@@ -1,0 +1,12 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Class : </h4>
+    <button type="button" class="close btn btn-outline-secondary" aria-label="Close" (click)="modal.dismiss()">
+      <fa-icon [icon]="faTimes"></fa-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+      <p *ngFor="let class of classes">{{class | json}}</p>
+      <p *ngFor="let classroom of classrooms">{{classroom | json}}</p>
+  </div>
+</ng-template>

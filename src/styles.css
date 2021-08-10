@@ -19,3 +19,7 @@
 .card{
     margin-bottom:20px;
 }
+.table-responsive{
+    overflow-x: auto;
+  overflow-y: hidden;
+}

@@ -9,16 +9,17 @@ import { Classroom } from 'src/app/models/Classroom';
 import { Class } from 'src/app/models/Class';
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '@angular/common';
-
 import {
   NgbCalendar,
   NgbDate,
   NgbDateStruct,
   NgbInputDatepickerConfig
 } from '@ng-bootstrap/ng-bootstrap';
+
 import { DateService } from 'src/app/services/date.service';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { Schedule } from 'src/app/models/Schedule';
+
 @Component({
   selector: 'app-new-schedule-modal',
   templateUrl: './new-schedule-modal.component.html',

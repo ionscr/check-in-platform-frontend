@@ -16,6 +16,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ClassroomService } from 'src/app/services/classroom.service';
 import { ClassService } from 'src/app/services/class.service';
 import { ScheduleService } from 'src/app/services/schedule.service';
+import { RefreshService } from 'src/app/services/refresh.service';
 
 @Component({
   selector: 'app-teacher-modal',
@@ -42,7 +43,7 @@ export class TeacherModalComponent implements OnInit {
   edit: boolean = false;
   class_name: string = "";
 
-  constructor(private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService, private classroomService: ClassroomService, private classService: ClassService, private scheduleService: ScheduleService) { }
+  constructor(private refreshService: RefreshService ,private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService, private classroomService: ClassroomService, private classService: ClassService, private scheduleService: ScheduleService) { }
 
   ngOnInit(): void {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
@@ -57,7 +58,7 @@ export class TeacherModalComponent implements OnInit {
     this.selectedClassroom = this.dayClass.classroom;
     this.edit = false;
     this.filteredClassrooms = this.filterClassrooms();
-    this.modalService.open(content, { centered: true }).result.then( (value) => {if( value == 1) this.addReservation(this.selectedStudent); else if( value== 2) this.deleteReservation(this.selectedReservation); }, () => {});
+    this.modalService.open(content, { centered: true }).result.then( (value) => {if( value == 1) this.addReservation(this.selectedStudent); else if( value== 2) this.deleteReservation(this.selectedReservation); else if(value == 3) this.deleteSchedule(); }, () => {});
   }
   getStudents(): void {
     this.userService.findUsersByRole(1).subscribe((students) => (this.students = students));
@@ -100,5 +101,11 @@ export class TeacherModalComponent implements OnInit {
   }
   filterClassrooms(): Classroom[] {
     return this.classrooms.filter(classroom => classroom.id != this.dayClass.classroom.id);
+  }
+  deleteSchedule(){
+    if(this.dayClass.id != undefined){
+      this.scheduleService.deleteSchedule(this.dayClass.id).subscribe();
+      this.refreshService.setRefresh(1);
+    }
   }
 }

@@ -20,7 +20,6 @@ export class ScheduleComponent implements OnInit, OnChanges {
     this.week = this.generateWeek();
     if(changes.refresh.currentValue==1){
       this.generateDates();
-      this.refreshService.setRefresh(0);
     }
 }
   ngOnInit(): void {
@@ -29,6 +28,7 @@ export class ScheduleComponent implements OnInit, OnChanges {
   generateDates(){
     this.monday = this.generateMonday();
     this.week = this.generateWeek();
+    this.refreshService.setRefresh(0);
   }
   generateMonday(): Date {
     return this.dateService.getMonday(this.weekNr);

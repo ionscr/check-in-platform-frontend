@@ -1,1 +1,85 @@
-<p>manage-users works!</p>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Manage users </h4>
+      <button
+        type="button"
+        class="close btn btn-outline-secondary"
+        aria-label="Close"
+        (click)="modal.dismiss()"
+      >
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class= "max-width">
+            <b>Add new user:</b> <br>
+         <form>
+           <div class="input-group mb-3">
+             <div class="input-group-prepend">
+               <label class="input-group-text" for="first_name">First name : </label>
+             </div>
+             <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter first name" [(ngModel)]="first_name">
+           </div>
+           <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="last_name">Last name : </label>
+            </div>
+            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter last name" [(ngModel)]="last_name">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="roleSelect">Select role : </label>
+            </div>
+            <select class="form-control" id="roleSelect" aria-describedby="basic-addon3" name="roleselect" [(ngModel)]="role" required>
+              <option selected [value]="1">student</option>
+              <option [value]="2">teacher</option>
+              <option [value]="3">admin</option>
+            </select>
+          </div>
+          <div class="input-group mb-3" *ngIf="role==1">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="last_name">Year : </label>
+            </div>
+            <input type="text" class="form-control" name="year" id="year" placeholder="Enter students year" [(ngModel)]="year">
+          </div>
+          <div class="input-group mb-3" *ngIf="role==1">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="last_name">Department : </label>
+            </div>
+            <input type="text" class="form-control" name="department" id="department" placeholder="Enter students department" [(ngModel)]="department">
+          </div>
+       <div class="input-group mb-3" *ngIf="role==1">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="last_name">Section : </label>
+        </div>
+        <input type="text" class="form-control" name="section" id="section" placeholder="Enter students section" [(ngModel)]="section">
+      </div>
+   <div class="input-group mb-3" *ngIf="role==1">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="last_name">Group : </label>
+    </div>
+    <input type="text" class="form-control" name="group" id="group" placeholder="Enter students group" [(ngModel)]="group">
+  </div>
+   <button type="button" class="btn btn-outline-secondary" (click)="modal.close(1)">Save user</button>
+ </form> </div>
+    <hr>
+        
+        <div class= "max-width">
+            <b>Delete a user:</b> <br>
+         <form>
+           <div class="input-group mb-3">
+             <div class="input-group-prepend">
+               <label class="input-group-text" for="usersSelect">Select user : </label>
+             </div>
+             <select class="form-control" id="usersSelect" aria-describedby="basic-addon3" name="userselect" [(ngModel)]="selectedUser" required>
+               <option hidden>Choose here</option>
+               <option *ngFor="let user of users" [ngValue]="user"> {{user.first_name}} {{user.last_name}}</option>
+             </select>
+           </div>
+           <button type="button" class="btn btn-outline-secondary" (click)="modal.close(2)">Delete user</button>
+         </form>
+       </div>
+       </div>
+     <div class="modal-footer"></div>
+  </ng-template>
+  

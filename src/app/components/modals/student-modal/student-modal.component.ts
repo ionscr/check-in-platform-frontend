@@ -37,12 +37,12 @@ export class StudentModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
-    this.getStudents();
   }
   ngOnDestroy(){
     this.eventsSubsription.unsubscribe();
   }
   openModal(content: TemplateRef<any>): void {
+    this.getStudents();
     this.modalService.open(content, { centered: true }).result.then( () => {this.addReservation(this.selectedStudent); }, () => {});
   }
   getStudents(): void {

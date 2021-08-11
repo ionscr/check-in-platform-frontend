@@ -28,7 +28,6 @@ import { RefreshService } from 'src/app/services/refresh.service';
 })
 export class NewScheduleModalComponent implements OnInit {
   @Input() events: Observable<void>;
-  @Input() day: number = -1;
   @Input() weekNr: number = 0;
   @ViewChild('content') private content: TemplateRef<any>;
   private eventsSubsription: Subscription;

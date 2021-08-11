@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-manage-classrooms',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-classrooms.component.css']
 })
 export class ManageClassroomsComponent implements OnInit {
-
+  @Input() events: Observable<void>;
   constructor() { }
 
   ngOnInit(): void {

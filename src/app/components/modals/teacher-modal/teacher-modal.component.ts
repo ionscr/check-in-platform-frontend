@@ -58,6 +58,8 @@ export class TeacherModalComponent implements OnInit {
     this.selectedClassroom = this.dayClass.classroom;
     this.edit = false;
     this.filteredClassrooms = this.filterClassrooms();
+    this.getStudents();
+    this.getClassrooms();
     this.modalService.open(content, { centered: true }).result.then( (value) => {if( value == 1) this.addReservation(this.selectedStudent); else if( value== 2) this.deleteReservation(this.selectedReservation); else if(value == 3) this.deleteSchedule(); }, () => {});
   }
   getStudents(): void {

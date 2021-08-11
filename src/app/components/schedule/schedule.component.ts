@@ -16,9 +16,12 @@ export class ScheduleComponent implements OnInit, OnChanges {
   week: string[] = [];
   constructor(private dateService: DateService, private refreshService: RefreshService) { }
   ngOnChanges(changes: SimpleChanges) {
-    this.monday = this.generateMonday();
-    this.week = this.generateWeek();
-    if(changes.refresh.currentValue==1){
+    console.log(changes.weekNr);
+    if((changes.weekNr != undefined) && (changes.weekNr.currentValue != changes.weekNr.previousValue )){
+      this.monday = this.generateMonday();
+      this.week = this.generateWeek();
+    }
+    else if(changes.refresh.currentValue==1){
       this.generateDates();
     }
 }

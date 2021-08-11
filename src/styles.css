@@ -21,7 +21,7 @@
 }
 .table-responsive{
     overflow-x: auto;
-  overflow-y: hidden;
+    overflow-y: hidden;
 }
 td{
     padding: 20px;

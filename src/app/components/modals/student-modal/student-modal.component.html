@@ -24,7 +24,7 @@
         </div>
         <select class="form-control" id="studentsSelect" aria-describedby="basic-addon3" name="studentSelect" [(ngModel)]="selectedStudent" required>
           <option hidden>Choose here</option>
-          <option *ngFor="let student of students" [value]="student.id"> {{student.first_name}} {{student.last_name}}</option>
+          <option *ngFor="let student of students" [ngValue]="student"> {{student.first_name}} {{student.last_name}}</option>
         </select>
       </div>
     </form>

@@ -50,17 +50,17 @@ export class StudentModalComponent implements OnInit {
     this.userService.findUsersByRole(1).subscribe((students) => (this.students = students));
   }
   addReservation(student: User): void{
+    console.log(student);
     if(this.capacity == this.dayClass.classroom.capacity){
       alert("This classroom is at full capacity!");
     } 
     else{
       this.studentOk = 1;
-      const student1: User = {id: Number(JSON.stringify(student).match(/\d/g)), first_name: "", last_name: "", role: 1};
       this.reservations.forEach(reservation => {
-        if(reservation.student.id === student1.id) this.studentOk = 0;
+        if(reservation.student.id === student.id) this.studentOk = 0;
       });
       if(this.studentOk){
-        const reservation: Reservations = {schedule: this.dayClass, student: student1}
+        const reservation: Reservations = {schedule: this.dayClass, student: student}
         this.reservationsService.addReservation(reservation).subscribe((reservation) => (this.reservations.push(reservation), this.capacity = this.reservations.length));
         this.newReservationEvent.emit(1);
       }

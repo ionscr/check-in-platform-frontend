@@ -142,12 +142,90 @@
           </div>
           <hr>
           <div class="max-width">
+            <b>Manage features of a classroom:</b> <br />
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classroomForFeatureSelect"
+                    >Select classroom :
+                  </label>
+                </div>
+                <select
+                  class="form-control"
+                  id="classroomForFeatureSelect"
+                  aria-describedby="basic-addon3"
+                  name="classroomSelect"
+                  [(ngModel)]="featureClassroom"
+                  required
+                >
+                  <option hidden>Choose here</option>
+                  <option *ngFor="let classroom of classrooms" [ngValue]="classroom">
+                    {{ classroom.name }} at {{classroom.location}}
+                  </option>
+                </select>
+                </div>
+                <div *ngIf="featureClassroom">
+                  <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="feature_name"
+                    >Feature name:
+                  </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="feature_name"
+                  id="feature_name"
+                  placeholder="Enter feature name"
+                  [(ngModel)]="feature_name"
+                />
+              </div>
+              <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="addFeature()"
+            >
+              Add feature
+            </button> 
+            <br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="featureSelect"
+                    >Select feature :
+                  </label>
+                </div>
+                <select
+                  class="form-control"
+                  id="featureSelect"
+                  aria-describedby="basic-addon3"
+                  name="featureSelect"
+                  [(ngModel)]="selectedFeature"
+                  required
+                >
+                  <option hidden>Choose here</option>
+                  <option *ngFor="let feature of filterFeature()" [ngValue]="feature">
+                    {{feature.feature}}
+                  </option>
+                </select>
+                </div>
+                <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="deleteFeature()"
+            >
+              Delete feature
+            </button> 
+              </div>
+            </form>
+          </div>
+          <hr>
+          <div class="max-width">
             <b>Delete a classroom:</b> <br />
             <form>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="classroomForDeleteSelect"
-                    >Select class :
+                    >Select classroom :
                   </label>
                 </div>
                 <select

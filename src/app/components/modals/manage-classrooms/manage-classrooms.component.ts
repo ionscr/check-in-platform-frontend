@@ -36,6 +36,9 @@ export class ManageClassroomsComponent implements OnInit {
   update_classroom_name: string = "";
   update_classroom_location: string = "";
   update_classroom_capacity: number = 0;
+  featureClassroom!: Classroom;
+  feature_name: string = "";
+  selectedFeature!: Feature;
   faTimes = faTimes;
 
   constructor(private scheduleService: ScheduleService, private reservationService: ReservationsService ,private refreshService: RefreshService ,private modalService: NgbModal, private classroomService: ClassroomService, private featureService: FeatureService) { }
@@ -84,9 +87,21 @@ export class ManageClassroomsComponent implements OnInit {
     this.features.forEach((feature) => {if(feature.classroom.id == this.selectedClassroom.id) selectedFeatures.push(feature);});
     selectedFeatures.forEach((feature) => {this.featureService.deleteFeature(feature.id).subscribe();});
   }
+  addFeature(){
+    const feature: Feature = {feature: this.feature_name, classroom: this.featureClassroom};
+    this.featureService.addFeature(feature).subscribe((feature) => this.features.push(feature));
+    this.feature_name = "";
+  }
+  deleteFeature(){
+    if(this.selectedFeature){
+      this.featureService.deleteFeature(Number(this.selectedFeature.id)).subscribe();
+    }
+    this.getFeatures();
+  }
   deleteClassroom(){
     if(this.selectedClassroom != null && this.selectedClassroom != undefined){
     this.deleteSchedulesByClassroom();
+    this.deleteFeaturesByClassroom();
     this.classroomService.deleteClassroom(Number(this.selectedClassroom.id)).subscribe();
     this.requestRefresh();
     }
@@ -98,12 +113,18 @@ export class ManageClassroomsComponent implements OnInit {
   clearParams(){
     this.updatedClassroom = null;
     this.selectedClassroom = null;
+    this.featureClassroom = null;
+    this.selectedFeature = null;
     this.classroom_name = "";
     this.classroom_location = "";
     this.classroom_capacity = 0;
     this.update_classroom_name = "";
     this.update_classroom_location = "";
     this.update_classroom_capacity = 0;
+    this.feature_name = "";
   }
-
+  filterFeature(): any[]{
+    var features = this.features;
+    return features.filter(i => i.classroom.id == this.featureClassroom.id);
+  }
 }

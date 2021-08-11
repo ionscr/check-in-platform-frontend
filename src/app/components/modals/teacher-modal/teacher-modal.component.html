@@ -120,7 +120,7 @@
             required
           >
             <option hidden>Choose here</option>
-            <option *ngFor="let student of students" [value]="student.id">
+            <option *ngFor="let student of students" [ngValue]="student">
               {{ student.first_name }} {{ student.last_name }}
             </option>
           </select>
@@ -154,7 +154,7 @@
             <option hidden>Choose here</option>
             <option
               *ngFor="let reservation of reservations"
-              [value]="reservation.id"
+              [ngValue]="reservation"
             >
               {{ reservation.student.first_name }}
               {{ reservation.student.last_name }}

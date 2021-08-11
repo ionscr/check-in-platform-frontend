@@ -69,7 +69,7 @@ export class TeacherModalComponent implements OnInit {
     this.classroomService.getClassrooms().subscribe((classrooms) => (this.classrooms = classrooms));
   }
   deleteReservation(reservation: Reservations): void{
-    this.reservationsService.deleteReservation(Number(reservation)).subscribe(() => (this.reservationEvent.emit(1)));
+    this.reservationsService.deleteReservation(Number(reservation.id)).subscribe(() => (this.reservationEvent.emit(1)));
     this.requestRefresh();
   }
   addReservation(student: User): void{
@@ -78,14 +78,12 @@ export class TeacherModalComponent implements OnInit {
     } 
     else{
       this.studentOk = 1;
-      const student1: User = {id: Number(JSON.stringify(student).match(/\d/g)), first_name: "", last_name: "", role: 1};
       this.reservations.forEach(reservation => {
-        if(reservation.student.id === student1.id) this.studentOk = 0;
+        if(reservation.student.id === student.id) this.studentOk = 0;
       });
       if(this.studentOk){
-        const reservation: Reservations = {schedule: this.dayClass, student: student1}
+        const reservation: Reservations = {schedule: this.dayClass, student: student}
         this.reservationsService.addReservation(reservation).subscribe((reservation) => (this.reservations.push(reservation), this.capacity = this.reservations.length));
-        this.reservationEvent.emit(1);
       }
       else{
         alert("This student already has a reservation!");

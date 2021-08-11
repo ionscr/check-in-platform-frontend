@@ -50,7 +50,6 @@ export class StudentModalComponent implements OnInit {
     this.userService.findUsersByRole(1).subscribe((students) => (this.students = students));
   }
   addReservation(student: User): void{
-    console.log(student);
     if(this.capacity == this.dayClass.classroom.capacity){
       alert("This classroom is at full capacity!");
     } 

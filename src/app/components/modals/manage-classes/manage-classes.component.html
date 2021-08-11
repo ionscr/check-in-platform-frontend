@@ -117,7 +117,6 @@
                   class="form-control"
                   name="class_name"
                   id="update_class_name"
-                  [value]="updatedClass.name"
                   placeholder="Enter class name"
                   [(ngModel)]="update_class_name"
                 />
@@ -136,7 +135,7 @@
                   [(ngModel)]="update_class_teacher"
                   required
                 >
-                  <option *ngFor="let teacher of teachers" [ngValue]="teacher" [selected]="teacher.id==updatedClass.teacher.id">{{teacher.first_name}} {{teacher.last_name}}</option>
+                  <option *ngFor="let teacher of teachers" [ngValue]="teacher">{{teacher.first_name}} {{teacher.last_name}}</option>
                 </select>
               </div>
               <div class="input-group mb-3">
@@ -148,7 +147,6 @@
                   class="form-control"
                   name="class_year"
                   id="class_year"
-                  [value]="updatedClass.year"
                   placeholder="Enter class year"
                   [(ngModel)]="update_class_year"
                 />
@@ -162,7 +160,6 @@
                   class="form-control"
                   name="class_section"
                   id="class_section"
-                  [value]="updatedClass.section"
                   placeholder="Enter class section"
                   [(ngModel)]="update_class_section"
                 />
@@ -178,6 +175,40 @@
             </form>
           </div>
           <hr>
+          <div class="max-width">
+            <b>Delete a class:</b> <br />
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classForDeleteSelect"
+                    >Select class :
+                  </label>
+                </div>
+                <select
+                  class="form-control"
+                  id="classForDeleteSelect"
+                  aria-describedby="basic-addon3"
+                  name="classSelect"
+                  [(ngModel)]="selectedClass"
+                  required
+                >
+                  <option hidden>Choose here</option>
+                  <option *ngFor="let class of classes" [ngValue]="class">
+                    {{ class.name }}
+                  </option>
+                </select>
+                </div>
+                
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="modal.close(3)"
+              >
+                Delete
+              </button>
+ 
+            </form>
+          </div>
         </div>
   </ng-template>
   

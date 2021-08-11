@@ -7,7 +7,11 @@ import { ClassService } from 'src/app/services/class.service';
 import { Class } from 'src/app/models/Class';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
-import { ThrowStmt } from '@angular/compiler';
+import { ScheduleService } from 'src/app/services/schedule.service';
+import { ReservationsService } from 'src/app/services/reservations.service';
+import { Schedule } from 'src/app/models/Schedule';
+import { map } from 'rxjs/operators';
+import { Reservations } from 'src/app/models/Reservations';
 @Component({
   selector: 'app-manage-classes',
   templateUrl: './manage-classes.component.html',
@@ -19,19 +23,21 @@ export class ManageClassesComponent implements OnInit {
   private eventsSubsription: Subscription;
   classes: Class[] = [];
   teachers: User[] = [];
+  schedules: Schedule[] = [];
+  reservations: Reservations[] = [];
   updatedClass: Class;
   selectedClass: Class;
   class_name: string = "";
   class_year: number = 0;
   class_section: string = "";
   class_teacher!: User;
-  update_class_name: string;
-  update_class_year: number;
-  update_class_section: string;
-  update_class_teacher: User;
+  update_class_name: string = "";
+  update_class_year: number = 0;
+  update_class_section: string = "";
+  update_class_teacher!: User;
   faTimes = faTimes;
 
-  constructor(private refreshService: RefreshService ,private modalService: NgbModal, private classService: ClassService, private userService: UserService) { }
+  constructor(private scheduleService: ScheduleService, private reservationService: ReservationsService ,private refreshService: RefreshService ,private modalService: NgbModal, private classService: ClassService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
@@ -43,7 +49,7 @@ export class ManageClassesComponent implements OnInit {
     this.clearParams();
     this.getClasses();
     this.getTeachers();
-    this.modalService.open(content, { centered: true }).result.then((value) => {if(value == 1) this.addClass(); if(value == 2) this.updateClass()}, () => {this.requestRefresh()})
+    this.modalService.open(content, { centered: true }).result.then((value) => {if(value == 1) this.addClass(); if(value == 2) this.updateClass(); if(value == 3) this.deleteClass();}, () => {this.requestRefresh()})
   }
   getClasses(){
     this.classService.getClasses().subscribe((classes) => (this.classes = classes));
@@ -62,7 +68,27 @@ export class ManageClassesComponent implements OnInit {
     this.updatedClass.section = this.update_class_section;
     this.updatedClass.year = Number(this.update_class_year);
     this.classService.updateClass(this.updatedClass).subscribe();
+  }
+  deleteSchedulesByClass(){
+    this.scheduleService.getSchedules().pipe(
+      map(schedules =>
+        schedules.filter(schedule => schedule.classn.id != this.selectedClass.id))
+    ).subscribe((schedules) => (this.schedules = schedules));
+    this.reservationService.getReservations().pipe(
+      map(reservations => 
+        reservations.filter(reservation => reservation.schedule.classn.id != this.selectedClass.id))
+    ).subscribe((reservations) => (this.reservations = reservations));
+    console.log(this.schedules);
+    console.log(this.reservations);
+  }
+  deleteClass(){
+    console.log(this.selectedClass);
+
+    if(this.selectedClass != null && this.selectedClass != undefined){
+      this.deleteSchedulesByClass();
+    //  this.classService.deleteClass(Number(this.selectedClass.id)).subscribe();
     this.getClasses();
+    }
   }
   requestRefresh(){
     this.refreshService.setRefresh(true);
@@ -79,6 +105,5 @@ export class ManageClassesComponent implements OnInit {
     this.update_class_section = "";
     this.update_class_teacher = null;
     this.update_class_year = 0;
-    
   }
 }

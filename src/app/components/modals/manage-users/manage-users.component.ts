@@ -39,10 +39,11 @@ export class ManageUsersComponent implements OnInit {
   constructor(private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService, private classService: ClassService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((users) => (this.users = users));
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
   }
   openModal(content: TemplateRef<any>): void {
+    this.clearParams();
+    this.userService.getUsers().subscribe((users) => (this.users = users));
     this.modalService.open(content, { centered: true }).result.then((value) => {if(value==1) this.saveUser(); else if(value == 2) this.deleteUser()}, () => {})
   }
   saveUser(){
@@ -78,5 +79,14 @@ export class ManageUsersComponent implements OnInit {
       this.userService.deleteUser(this.selectedUser.id).subscribe();
       this.users.filter((user) => user.id != this.selectedUser.id);
     }
+  }
+  clearParams(){
+  this.first_name = "";
+  this.last_name = "";
+  this.role = 0;
+  this.year = "0";
+  this.department = "";
+  this.section = "";
+  this.group = "";
   }
 }

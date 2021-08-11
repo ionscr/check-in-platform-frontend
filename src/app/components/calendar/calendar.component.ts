@@ -19,16 +19,14 @@ export class CalendarComponent implements OnInit {
   monday: string = "";
   friday: string = "";
   role: string = "";
-  refresh: number = 0;
   faForward = faForward;
   faBackward = faBackward;
-  constructor(private dateService: DateService, private roleService: RoleService, private refreshService: RefreshService) { }
+  constructor(private dateService: DateService, private roleService: RoleService) { }
 
   ngOnInit(): void {
     this.monday = this.formatMonday();
     this.friday = this.formatFriday();
     this.roleService.roleChange.subscribe(value => {this.role = value});
-    this.refreshService.refreshChange.subscribe(value => {this.refresh = value});
   }
   formatMonday(): string{
     return formatDate(this.dateService.getMonday(this.weekNr),'dd.MM','en-US');

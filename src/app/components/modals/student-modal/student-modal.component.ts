@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { RefreshService } from 'src/app/services/refresh.service';
 
 @Component({
   selector: 'app-student-modal',
@@ -33,7 +34,7 @@ export class StudentModalComponent implements OnInit {
   faTimes=faTimes;
   studentOk: number = 1;
 
-  constructor(private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService) { }
+  constructor(private refreshService: RefreshService ,private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService) { }
 
   ngOnInit(): void {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
@@ -67,6 +68,7 @@ export class StudentModalComponent implements OnInit {
         alert("This student already has a reservation!");
       }
     }
+    this.refreshService.setRefresh(true);
+    this.refreshService.setRefresh(false);
   }
-
 }

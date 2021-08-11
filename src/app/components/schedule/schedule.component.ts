@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { DateService } from 'src/app/services/date.service';
 import { formatDate } from '@angular/common';
 import { SimpleChanges } from '@angular/core';
@@ -11,27 +11,29 @@ import { RefreshService } from 'src/app/services/refresh.service';
 })
 export class ScheduleComponent implements OnInit, OnChanges {
   @Input() weekNr = 0;
-  @Input() refresh = 0;
   monday: Date = new Date();
   week: string[] = [];
-  constructor(private dateService: DateService, private refreshService: RefreshService) { }
+  refresh = false;
+  constructor(private dateService: DateService, private refreshService: RefreshService, private cdRef: ChangeDetectorRef) { }
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes.weekNr);
-    if((changes.weekNr != undefined) && (changes.weekNr.currentValue != changes.weekNr.previousValue )){
       this.monday = this.generateMonday();
       this.week = this.generateWeek();
-    }
-    else if(changes.refresh.currentValue==1){
-      this.generateDates();
-    }
-}
+  }
   ngOnInit(): void {
     this.generateDates();
+    this.refreshService.refreshChange.subscribe(value => {this.refresh = value});
+    this.refreshService.changeDetectionEmitter.subscribe(
+      () => {
+        this.cdRef.detectChanges();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
   generateDates(){
     this.monday = this.generateMonday();
     this.week = this.generateWeek();
-    this.refreshService.setRefresh(0);
   }
   generateMonday(): Date {
     return this.dateService.getMonday(this.weekNr);

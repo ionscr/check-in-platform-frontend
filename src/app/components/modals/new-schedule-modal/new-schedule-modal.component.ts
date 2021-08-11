@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import {NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import { TemplateRef } from '@angular/core';
@@ -8,7 +8,8 @@ import { ClassroomService } from 'src/app/services/classroom.service';
 import { Classroom } from 'src/app/models/Classroom';
 import { Class } from 'src/app/models/Class';
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
-import { formatDate } from '@angular/common';
+import { delay } from 'rxjs/operators';
+
 import {
   NgbCalendar,
   NgbDate,
@@ -76,6 +77,7 @@ export class NewScheduleModalComponent implements OnInit {
     var time: string = hour + ":" + minute + ":00";
     const schedule: Schedule = {localDate: date, localTime: time, classn: this.selectedClass, classroom: this.selectedClassroom};
     this.scheduleService.addSchedule(schedule).subscribe();
-    this.refreshService.setRefresh(1);
+    this.refreshService.setRefresh(true);
+    this.refreshService.setRefresh(false);
   }
 }

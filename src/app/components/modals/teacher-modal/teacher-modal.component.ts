@@ -70,6 +70,7 @@ export class TeacherModalComponent implements OnInit {
   }
   deleteReservation(reservation: Reservations): void{
     this.reservationsService.deleteReservation(Number(reservation)).subscribe(() => (this.reservationEvent.emit(1)));
+    this.requestRefresh();
   }
   addReservation(student: User): void{
     if(this.capacity == this.dayClass.classroom.capacity){
@@ -90,6 +91,7 @@ export class TeacherModalComponent implements OnInit {
         alert("This student already has a reservation!");
       }
     }
+    this.requestRefresh();
   }
   onEdit(){
     this.edit = !this.edit;
@@ -100,6 +102,7 @@ export class TeacherModalComponent implements OnInit {
     this.dayClass.classroom = this.selectedClassroom;
     this.classService.updateClass(this.dayClass.classn).subscribe();
     this.scheduleService.updateSchedule(this.dayClass).subscribe();
+    this.requestRefresh();
   }
   filterClassrooms(): Classroom[] {
     return this.classrooms.filter(classroom => classroom.id != this.dayClass.classroom.id);
@@ -107,7 +110,11 @@ export class TeacherModalComponent implements OnInit {
   deleteSchedule(){
     if(this.dayClass.id != undefined){
       this.scheduleService.deleteSchedule(this.dayClass.id).subscribe();
-      this.refreshService.setRefresh(1);
     }
+    this.requestRefresh();
+  }
+  requestRefresh(){
+    this.refreshService.setRefresh(true);
+    this.refreshService.setRefresh(false);
   }
 }

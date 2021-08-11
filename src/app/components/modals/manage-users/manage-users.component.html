@@ -152,7 +152,7 @@
             <div class="input-group mb-3">
           <div class="input-group-prepend">
             <label class="input-group-text" for="first_name"
-              >First name :
+              >First name <i>(old: <b>{{updatedUser.first_name}}</b>)</i>
             </label>
           </div>
           <input
@@ -160,21 +160,19 @@
             class="form-control"
             name="first_name"
             id="update_first_name"
-            [value]="updatedUser.first_name"
             placeholder="Enter first name"
             [(ngModel)]="update_first_name"
           />
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="last_name">Last name : </label>
+            <label class="input-group-text" for="last_name">Last name <i>(old: <b>{{updatedUser.last_name}}</b>)</i> </label>
           </div>
           <input
             type="text"
             class="form-control"
             name="last_name"
             id="last_name"
-            [value]="updatedUser.last_name"
             placeholder="Enter last name"
             [(ngModel)]="update_last_name"
           />
@@ -182,7 +180,7 @@
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <label class="input-group-text" for="roleSelect"
-              >Select role :
+              >Select role <i>(old: <b>{{updatedUser.role}}</b>)</i>
             </label>
           </div>
           <select
@@ -190,7 +188,6 @@
             id="roleSelect"
             aria-describedby="basic-addon3"
             name="roleselect"
-            [value]="updatedUser.role"
             [(ngModel)]="update_role"
             required
           >
@@ -201,7 +198,7 @@
         </div>
         <div class="input-group mb-3" *ngIf="updatedUser.role == 1 || update_role == 1">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="last_name">Year : </label>
+            <label class="input-group-text" for="last_name">Year <i>(old: <b>{{updatedUser.year}}</b>)</i> </label>
           </div>
           <input
             type="text"
@@ -210,13 +207,12 @@
             id="year"
             placeholder="Enter students year"
             [(ngModel)]="update_year"
-            [value]="updatedUser.year"
           />
         </div>
         <div class="input-group mb-3" *ngIf="updatedUser.role == 1 || update_role == 1">
           <div class="input-group-prepend">
             <label class="input-group-text" for="last_name"
-              >Department :
+              >Department <i>(old: <b>{{updatedUser.department}}</b>)</i>
             </label>
           </div>
           <input
@@ -225,13 +221,12 @@
             name="department"
             id="department"
             placeholder="Enter students department"
-            [value]="updatedUser.department"
             [(ngModel)]="update_department"
           />
         </div>
         <div class="input-group mb-3" *ngIf="updatedUser.role == 1 || update_role == 1">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="last_name">Section : </label>
+            <label class="input-group-text" for="last_name">Section <i>(old: <b>{{updatedUser.section}}</b>)</i> </label>
           </div>
           <input
             type="text"
@@ -239,13 +234,12 @@
             name="section"
             id="section"
             placeholder="Enter students section"
-            [value]="updatedUser.section"
             [(ngModel)]="update_section"
           />
         </div>
         <div class="input-group mb-3" *ngIf="updatedUser.role == 1 || update_role == 1">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="last_name">Group : </label>
+            <label class="input-group-text" for="last_name">Group <i>(old: <b>{{updatedUser.group}}</b>)</i> </label>
           </div>
           <input
             type="text"
@@ -253,7 +247,6 @@
             name="group"
             id="group"
             placeholder="Enter students group"
-            [value]="updatedUser.group"
             [(ngModel)]="update_f_group"
           />
         </div>

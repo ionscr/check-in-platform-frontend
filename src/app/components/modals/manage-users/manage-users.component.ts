@@ -54,7 +54,7 @@ export class ManageUsersComponent implements OnInit {
   openModal(content: TemplateRef<any>): void {
     this.clearParams();
     this.userService.getUsers().subscribe((users) => (this.users = users));
-    this.modalService.open(content, { centered: true }).result.then((value) => {if(value==1) this.saveUser(); else if(value == 2) this.updateUser(); else if(value == 3) this.deleteUser()}, () => {this.requestRefresh()})
+    this.modalService.open(content, { centered: true, size: 'lg' }).result.then((value) => {if(value==1) this.saveUser(); else if(value == 2) this.updateUser(); else if(value == 3) this.deleteUser()}, () => {this.requestRefresh()})
   }
   saveUser(){
     const user: User = {first_name: this.first_name, last_name: this.last_name, role: Number(this.role), year: Number(this.year), department: this.department, section: this.section, group: this.f_group};

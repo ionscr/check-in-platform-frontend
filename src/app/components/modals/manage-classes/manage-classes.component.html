@@ -109,7 +109,7 @@
                   <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="class_name"
-                    >Class name :
+                    >Class name <i>(old: <b>{{updatedClass.name}}</b>)</i>
                   </label>
                 </div>
                 <input
@@ -124,7 +124,7 @@
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="teacherSelect"
-                    >Select teacher :
+                    >Select teacher <i>(old: <b>{{updatedClass.teacher.first_name}} {{updatedClass.teacher.last_name}}</b>)</i>
                   </label>
                 </div>
                 <select
@@ -140,7 +140,7 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <label class="input-group-text" for="class_year">Class year : </label>
+                  <label class="input-group-text" for="class_year">Class year <i>(old: <b>{{updatedClass.year}}</b>)</i> </label>
                 </div>
                 <input
                   type="text"
@@ -153,7 +153,7 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <label class="input-group-text" for="class_section">Class section : </label>
+                  <label class="input-group-text" for="class_section">Class section <i>(old: <b>{{updatedClass.section}}</b>)</i> </label>
                 </div>
                 <input
                   type="text"

@@ -51,7 +51,7 @@ export class ManageClassesComponent implements OnInit {
     this.getTeachers();
     this.scheduleService.getSchedules().subscribe((schedules) => (this.schedules = schedules));
     this.reservationService.getReservations().subscribe((reservations) => (this.reservations = reservations));
-    this.modalService.open(content, { centered: true }).result.then((value) => {if(value == 1) this.addClass(); if(value == 2) this.updateClass(); if(value == 3) this.deleteClass();}, () => {this.requestRefresh()})
+    this.modalService.open(content, { centered: true, size: 'lg' }).result.then((value) => {if(value == 1) this.addClass(); if(value == 2) this.updateClass(); if(value == 3) this.deleteClass();}, () => {this.requestRefresh()})
   }
   getClasses(){
     this.classService.getClasses().subscribe((classes) => (this.classes = classes));

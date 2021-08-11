@@ -80,7 +80,6 @@ export class ManageClassesComponent implements OnInit {
     selectedSchedules.forEach((schedule) => {this.scheduleService.deleteSchedule(schedule.id).subscribe()});
   }
   deleteClass(){
-    console.log(this.selectedClass);
     if(this.selectedClass != null && this.selectedClass != undefined){
     this.deleteSchedulesByClass();
     this.classService.deleteClass(Number(this.selectedClass.id)).subscribe();

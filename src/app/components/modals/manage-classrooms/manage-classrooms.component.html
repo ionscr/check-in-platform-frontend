@@ -1,0 +1,180 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Manage classrooms</h4>
+      <button
+        type="button"
+        class="close btn btn-outline-secondary"
+        aria-label="Close"
+        (click)="modal.dismiss()"
+      >
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="max-width">
+            <b>Add new classroom:</b> <br />
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classroom_name"
+                    >Classroom name:
+                  </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="classroom_name"
+                  id="classroom_name"
+                  placeholder="Enter classroom name"
+                  [(ngModel)]="classroom_name"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="class_year">Classroom location : </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="classroom_location"
+                  id="classroom_location"
+                  placeholder="Enter classroom location"
+                  [(ngModel)]="classroom_location"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classroom_capacity">Classroom capacity : </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="classroom_capacity"
+                  id="classroom_capacity"
+                  placeholder="Enter classroom capacity"
+                  [(ngModel)]="classroom_capacity"
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="modal.close(1)"
+              >
+                Save classroom
+              </button>
+            </form>
+          </div>
+          <hr />
+          <div class="max-width">
+            <b>Edit a classroom:</b> <br />
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classroomForUpdateSelect"
+                    >Select classroom :
+                  </label>
+                </div>
+                <select
+                  class="form-control"
+                  id="classroomForUpdateSelect"
+                  aria-describedby="basic-addon3"
+                  name="classroomSelect"
+                  [(ngModel)]="updatedClassroom"
+                  required
+                >
+                  <option hidden>Choose here</option>
+                  <option *ngFor="let classroom of classrooms" [ngValue]="classroom">
+                    {{ classroom.name }} at {{classroom.location}}
+                  </option>
+                </select>
+                </div>
+                <div *ngIf="updatedClassroom">
+                  <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classroom_name"
+                    >Classroom name <i>(old: <b>{{updatedClassroom.name}})</b></i>
+                  </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="classroom_name"
+                  id="update_classroom_name"
+                  placeholder="Enter classroom name"
+                  [(ngModel)]="update_classroom_name"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classroom_location">Classroom location <i>(old: <b>{{updatedClassroom.location}})</b></i> </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="classroom_location"
+                  id="classroom_location"
+                  placeholder="Enter class location"
+                  [(ngModel)]="update_classroom_location"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classroom_capacity">Classroom capacity <i>(old: <b>{{updatedClassroom.capacity}})</b></i> </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="classroom_capacity"
+                  id="classroom_capacity"
+                  placeholder="Enter classroom capacity"
+                  [(ngModel)]="update_classroom_capacity"
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="modal.close(2)"
+              >
+                Save
+              </button>
+              </div>
+            </form>
+          </div>
+          <hr>
+          <div class="max-width">
+            <b>Delete a classroom:</b> <br />
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classroomForDeleteSelect"
+                    >Select class :
+                  </label>
+                </div>
+                <select
+                  class="form-control"
+                  id="classroomForDeleteSelect"
+                  aria-describedby="basic-addon3"
+                  name="classroomSelect"
+                  [(ngModel)]="selectedClassroom"
+                  required
+                >
+                  <option hidden>Choose here</option>
+                  <option *ngFor="let classroom of classrooms" [ngValue]="classroom">
+                    {{ classroom.name }} at {{classroom.location}}
+                  </option>
+                </select>
+                </div>
+                
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="modal.close(3)"
+              >
+                Delete
+              </button>
+ 
+            </form>
+          </div>
+        </div>
+  </ng-template>
+  

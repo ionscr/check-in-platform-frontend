@@ -49,6 +49,8 @@ export class ManageClassesComponent implements OnInit {
     this.clearParams();
     this.getClasses();
     this.getTeachers();
+    this.scheduleService.getSchedules().subscribe((schedules) => (this.schedules = schedules));
+    this.reservationService.getReservations().subscribe((reservations) => (this.reservations = reservations));
     this.modalService.open(content, { centered: true }).result.then((value) => {if(value == 1) this.addClass(); if(value == 2) this.updateClass(); if(value == 3) this.deleteClass();}, () => {this.requestRefresh()})
   }
   getClasses(){
@@ -70,24 +72,19 @@ export class ManageClassesComponent implements OnInit {
     this.classService.updateClass(this.updatedClass).subscribe();
   }
   deleteSchedulesByClass(){
-    this.scheduleService.getSchedules().pipe(
-      map(schedules =>
-        schedules.filter(schedule => schedule.classn.id != this.selectedClass.id))
-    ).subscribe((schedules) => (this.schedules = schedules));
-    this.reservationService.getReservations().pipe(
-      map(reservations => 
-        reservations.filter(reservation => reservation.schedule.classn.id != this.selectedClass.id))
-    ).subscribe((reservations) => (this.reservations = reservations));
-    console.log(this.schedules);
-    console.log(this.reservations);
+    var selectedSchedules: Schedule[] = [];
+    var selectedReservations: Reservations[] = [];
+    this.reservations.forEach((reservation) => {if(reservation.schedule.classn.id == this.selectedClass.id) selectedReservations.push(reservation);});
+    this.schedules.forEach((schedule) => {if(schedule.classn.id == this.selectedClass.id) selectedSchedules.push(schedule)});
+    selectedReservations.forEach((reservation) => {this.reservationService.deleteReservation(reservation.id).subscribe()});
+    selectedSchedules.forEach((schedule) => {this.scheduleService.deleteSchedule(schedule.id).subscribe()});
   }
   deleteClass(){
     console.log(this.selectedClass);
-
     if(this.selectedClass != null && this.selectedClass != undefined){
-      this.deleteSchedulesByClass();
-    //  this.classService.deleteClass(Number(this.selectedClass.id)).subscribe();
-    this.getClasses();
+    this.deleteSchedulesByClass();
+    this.classService.deleteClass(Number(this.selectedClass.id)).subscribe();
+    this.requestRefresh();
     }
   }
   requestRefresh(){

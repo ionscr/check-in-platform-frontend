@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, TemplateRef, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import {NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
@@ -47,6 +47,9 @@ export class ManageUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
+  }
+  ngOnDestroy(): void{
+    this.eventsSubsription.unsubscribe();
   }
   openModal(content: TemplateRef<any>): void {
     this.clearParams();

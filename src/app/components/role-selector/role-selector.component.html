@@ -60,6 +60,6 @@
 <button type="button" *ngIf="role=='admin'" (click)="onAddClass()" class="btn btn-outline-secondary margin15">Manage classes</button> 
 <button type="button" *ngIf="role=='admin'" (click)="onAddClassroom()" class="btn btn-outline-secondary margin15">Manage classrooms</button>   
 <app-new-schedule-modal *ngIf="role=='teacher' || role=='admin'" [events]="newScheduleEventSubject.asObservable()"></app-new-schedule-modal>
-<app-manage-users *ngIf="role=='admin'" [events]="newUserEventSubject.asObservable()"></app-manage-users>
-<app-manage-classes *ngIf="role=='admin'" [events]="newClassEventSubject.asObservable()"></app-manage-classes>
-<app-manage-classrooms *ngIf="role=='admin'" [events]="newClassroomEventSubject.asObservable()"></app-manage-classrooms>
+<app-manage-users *ngIf="role=='admin' && !refresh" [events]="newUserEventSubject.asObservable()"></app-manage-users>
+<app-manage-classes *ngIf="role=='admin' && !refresh" [events]="newClassEventSubject.asObservable()"></app-manage-classes>
+<app-manage-classrooms *ngIf="role=='admin' && !refresh" [events]="newClassroomEventSubject.asObservable()"></app-manage-classrooms>

@@ -1,0 +1,88 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Manage classes</h4>
+      <button
+        type="button"
+        class="close btn btn-outline-secondary"
+        aria-label="Close"
+        (click)="modal.dismiss()"
+      >
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="max-width">
+            <b>Add new class:</b> <br />
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="class_name"
+                    >Class name:
+                  </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="class_name"
+                  id="class_name"
+                  placeholder="Enter class name"
+                  [(ngModel)]="class_name"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="teacherSelect"
+                    >Select teacher :
+                  </label>
+                </div>
+                <select
+                  class="form-control"
+                  id="teacherSelect"
+                  aria-describedby="basic-addon3"
+                  name="teacherselect"
+                  [(ngModel)]="class_teacher"
+                  required
+                >
+                  <option *ngFor="let teacher of teachers" [ngValue]="teacher">{{teacher.first_name}} {{teacher.last_name}}</option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="class_year">Class year : </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="class_year"
+                  id="class_year"
+                  placeholder="Enter class year"
+                  [(ngModel)]="class_year"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="class_section">Class section : </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="class_section"
+                  id="class_section"
+                  placeholder="Enter class section"
+                  [(ngModel)]="class_section"
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="modal.close(1)"
+              >
+                Save class
+              </button>
+            </form>
+          </div>
+          <hr />
+         
+        </div>
+  </ng-template>
+  

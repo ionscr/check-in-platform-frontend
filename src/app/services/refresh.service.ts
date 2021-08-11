@@ -14,6 +14,7 @@ export class RefreshService {
     });
    }
    setRefresh(refresh: boolean){
+     console.log(refresh);
      this.refresh = refresh;
      this.refreshChange.next(this.refresh);
      this.changeDetectionEmitter.emit();

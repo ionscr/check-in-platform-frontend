@@ -51,13 +51,13 @@ export class NewScheduleModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
-    this.classService.getClasses().subscribe((classes) => this.classes = classes);
-    this.classroomService.getClassrooms().subscribe((classrooms) => this.classrooms = classrooms);
     }
   ngOnDestroy(){
     this.eventsSubsription.unsubscribe();
   }
   openModal(content: TemplateRef<any>): void {
+    this.classService.getClasses().subscribe((classes) => this.classes = classes);
+    this.classroomService.getClassrooms().subscribe((classrooms) => this.classrooms = classrooms);
     this.modalService.open(content, { centered: true }).result.then(() => {this.addNewSchedule()}, () => {})
   }
   addNewSchedule(){

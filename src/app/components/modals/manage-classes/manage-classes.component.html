@@ -82,7 +82,102 @@
             </form>
           </div>
           <hr />
-         
+          <div class="max-width">
+            <b>Edit a class:</b> <br />
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="classForUpdateSelect"
+                    >Select class :
+                  </label>
+                </div>
+                <select
+                  class="form-control"
+                  id="classForUpdateSelect"
+                  aria-describedby="basic-addon3"
+                  name="classSelect"
+                  [(ngModel)]="updatedClass"
+                  required
+                >
+                  <option hidden>Choose here</option>
+                  <option *ngFor="let class of classes" [ngValue]="class">
+                    {{ class.name }}
+                  </option>
+                </select>
+                </div>
+                <div *ngIf="updatedClass">
+                  <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="class_name"
+                    >Class name :
+                  </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="class_name"
+                  id="update_class_name"
+                  [value]="updatedClass.name"
+                  placeholder="Enter class name"
+                  [(ngModel)]="update_class_name"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="teacherSelect"
+                    >Select teacher :
+                  </label>
+                </div>
+                <select
+                  class="form-control"
+                  id="teacherSelect"
+                  aria-describedby="basic-addon3"
+                  name="teacherSelect"
+                  [(ngModel)]="update_class_teacher"
+                  required
+                >
+                  <option *ngFor="let teacher of teachers" [ngValue]="teacher" [selected]="teacher.id==updatedClass.teacher.id">{{teacher.first_name}} {{teacher.last_name}}</option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="class_year">Class year : </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="class_year"
+                  id="class_year"
+                  [value]="updatedClass.year"
+                  placeholder="Enter class year"
+                  [(ngModel)]="update_class_year"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="class_section">Class section : </label>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="class_section"
+                  id="class_section"
+                  [value]="updatedClass.section"
+                  placeholder="Enter class section"
+                  [(ngModel)]="update_class_section"
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="modal.close(2)"
+              >
+                Save
+              </button>
+              </div>
+            </form>
+          </div>
+          <hr>
         </div>
   </ng-template>
   

@@ -7,7 +7,7 @@ import { ClassService } from 'src/app/services/class.service';
 import { Class } from 'src/app/models/Class';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
-import { sortAndDeduplicateDiagnostics } from 'typescript';
+import { ThrowStmt } from '@angular/compiler';
 @Component({
   selector: 'app-manage-classes',
   templateUrl: './manage-classes.component.html',
@@ -40,9 +40,10 @@ export class ManageClassesComponent implements OnInit {
     this.eventsSubsription.unsubscribe();
   }
   openModal(content: TemplateRef<any>): void {
+    this.clearParams();
     this.getClasses();
     this.getTeachers();
-    this.modalService.open(content, { centered: true }).result.then((value) => {if(value == 1) this.addClass();}, () => {this.requestRefresh()})
+    this.modalService.open(content, { centered: true }).result.then((value) => {if(value == 1) this.addClass(); if(value == 2) this.updateClass()}, () => {this.requestRefresh()})
   }
   getClasses(){
     this.classService.getClasses().subscribe((classes) => (this.classes = classes));
@@ -55,8 +56,29 @@ export class ManageClassesComponent implements OnInit {
     this.classService.addClass(class1).subscribe();
     this.getClasses();
   }
+  updateClass(){
+    this.updatedClass.name = this.update_class_name;
+    this.updatedClass.teacher = this.update_class_teacher;
+    this.updatedClass.section = this.update_class_section;
+    this.updatedClass.year = Number(this.update_class_year);
+    this.classService.updateClass(this.updatedClass).subscribe();
+    this.getClasses();
+  }
   requestRefresh(){
     this.refreshService.setRefresh(true);
     this.refreshService.setRefresh(false);
+  }
+  clearParams(){
+    this.updatedClass = null;
+    this.selectedClass = null;
+    this.class_name = "";
+    this.class_section = "";
+    this.class_teacher = null;
+    this.class_year = 0;
+    this.update_class_name = "";
+    this.update_class_section = "";
+    this.update_class_teacher = null;
+    this.update_class_year = 0;
+    
   }
 }

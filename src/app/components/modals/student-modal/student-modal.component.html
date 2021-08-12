@@ -11,7 +11,7 @@
       <b>Year:</b> {{dayClass.classn.year}} <br>
       <b>Teacher:</b> {{dayClass.classn.teacher.first_name}} {{dayClass.classn.teacher.last_name}} <br>
       <b>Classroom:</b> {{dayClass.classroom.name}} <i>at</i> {{dayClass.classroom.location}} <br>
-      <b>Features:</b><button type="button" class="btn btn-outline-secondary btn-sm feature-btn" disabled *ngFor="let feature of features"> {{feature.feature}} </button> <br>
+      <b>Features:</b><i *ngIf="features.length == 0"> There are no features for this classroom</i><button type="button" class="btn btn-outline-secondary btn-sm feature-btn" disabled *ngFor="let feature of features"> {{feature.feature}} </button> <br>
       <b>Capacity:</b> {{capacity}}/{{dayClass.classroom.capacity}}
     </div>
   <div class="modal-footer">

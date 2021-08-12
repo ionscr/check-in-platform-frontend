@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 
 import { Schedule } from 'src/app/models/Schedule';
 import { User } from 'src/app/models/User';
@@ -40,8 +40,10 @@ export class TeacherModalComponent implements OnInit {
   filteredClassrooms: Classroom[] = [];
   faTimes=faTimes;
   studentOk: number = 1;
-  edit: boolean = false;
   class_name: string = "";
+  class_year: string = "";
+  class_section: string = "";
+  time: NgbTimeStruct;
 
   constructor(private refreshService: RefreshService ,private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService, private classroomService: ClassroomService, private classService: ClassService, private scheduleService: ScheduleService) { }
 
@@ -56,11 +58,15 @@ export class TeacherModalComponent implements OnInit {
   openModal(content: TemplateRef<any>): void {
     this.class_name = this.dayClass.classn.name;
     this.selectedClassroom = this.dayClass.classroom;
-    this.edit = false;
+    this.class_section = this.dayClass.classn.section;
+    this.class_year = this.dayClass.classn.year.toString();
+    const timec = this.dayClass.localTime.split(":");
+    this.time = {hour: Number(timec[0]), minute: Number(timec[1]), second: Number(timec[2]) };
+    this.selectedClassroom = this.dayClass.classroom;
     this.filteredClassrooms = this.filterClassrooms();
     this.getStudents();
     this.getClassrooms();
-    this.modalService.open(content, { centered: true }).result.then( (value) => {if( value == 1) this.addReservation(this.selectedStudent); else if( value== 2) this.deleteReservation(this.selectedReservation); else if(value == 3) this.deleteSchedule(); }, () => {});
+    this.modalService.open(content, { centered: true }).result.then( (value) => {if( value == 1) this.addReservation(this.selectedStudent); else if( value== 2) this.deleteReservation(this.selectedReservation); else if(value == 3) this.deleteSchedule(); else if(value == 4) this.onSave(); }, () => {});
   }
   getStudents(): void {
     this.userService.findUsersByRole(1).subscribe((students) => (this.students = students));
@@ -91,11 +97,7 @@ export class TeacherModalComponent implements OnInit {
     }
     this.requestRefresh();
   }
-  onEdit(){
-    this.edit = !this.edit;
-  }
   onSave(){
-    this.edit = !this.edit;
     this.dayClass.classn.name = this.class_name;
     this.dayClass.classroom = this.selectedClassroom;
     this.classService.updateClass(this.dayClass.classn).subscribe();

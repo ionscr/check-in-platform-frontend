@@ -57,14 +57,14 @@
 <br>
 <div class="manage-div">
 <div ngbDropdown *ngIf="role=='admin'" class="margin15">
-  <button class="btn btn-outline-info adm-btn" id="dropdownBasic1" ngbDropdownToggle>Manage</button>
+  <button class="btn btn-outline-secondary adm-btn" id="dropdownBasic1" ngbDropdownToggle>Manage</button>
   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
     <button type="button" (click)="onAddUser()" class="dropdown-item btn btn-outline-secondary">Manage users</button>
     <button type="button" (click)="onAddClass()" class="dropdown-item btn btn-outline-secondary">Manage classes</button> 
     <button type="button" (click)="onAddClassroom()" class="dropdown-item btn btn-outline-secondary">Manage classrooms</button> 
   </div>
 </div>
-<button type="button" *ngIf="role=='teacher' || role=='admin'" (click)="onAddSchedule()" class="btn btn-outline-info adm-btn">Add schedule</button>
+<button type="button" *ngIf="role=='teacher' || role=='admin'" (click)="onAddSchedule()" class="btn btn-outline-secondary adm-btn">Add schedule</button>
 
 </div>
 <app-new-schedule-modal *ngIf="role=='teacher' || role=='admin'" [events]="newScheduleEventSubject.asObservable()"></app-new-schedule-modal>

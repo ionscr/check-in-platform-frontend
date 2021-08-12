@@ -108,7 +108,7 @@ export class TeacherModalComponent implements OnInit {
     return this.classrooms.filter(classroom => classroom.id != this.dayClass.classroom.id);
   }
   deleteScheduleReservations(){
-    this.reservations.forEach((reservation) => {this.reservationsService.deleteReservation(reservation.id);});
+    this.reservations.forEach((reservation) => {this.reservationsService.deleteReservation(Number(reservation.id)).subscribe();});
   }
   deleteSchedule(){
     if(this.dayClass.id != undefined){

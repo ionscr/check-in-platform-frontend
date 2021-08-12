@@ -1,5 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit schedule</h4>
     <button
       type="button"
       class="close btn btn-outline-secondary"
@@ -11,29 +12,90 @@
   </div>
   <div class="modal-body">
     <form>
-      <div class="input-group input-group-lg">
-        <div class="input-group-prepend input-group-lg">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
           <label class="input-group-text label-prepend" for="class"
             ><b>Class:</b>
           </label>
         </div>
         <input
-          [readonly]="!edit"
           [(ngModel)]="class_name"
           type="text"
           class="form-control"
           id="class"
           name="class"
-          aria-describedby="inputGroup-sizing-lg"
           value="{{ dayClass.classn.name }}"
         />
       </div>
     </form>
-    <b>Hour:</b> {{ dayClass.localTime.slice(0, 5) }} <br />
-    <b>Section:</b> {{ dayClass.classn.section }} <br />
-    <b>Year:</b> {{ dayClass.classn.year }} <br />
-    <b>Teacher:</b> {{ dayClass.classn.teacher.first_name }}
-    {{ dayClass.classn.teacher.last_name }} <br />
+    <form>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text label-prepend" for="dateSelect"
+              ><b>Hour: </b>
+            </label>
+          </div>
+          <ngb-timepicker [(ngModel)]="time" name="timepicker" [disabled]="true" [spinners]="false"></ngb-timepicker>
+      </div>
+    </form>
+    <form>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text label-prepend" for="class_section"
+            ><b>Section:</b>
+          </label>
+        </div>
+        <input
+          [(ngModel)]="class_section"
+          type="text"
+          class="form-control"
+          id="class_section"
+          name="class_section"
+          value="{{ dayClass.classn.section }}"
+          [disabled]="true"
+        />
+      </div>
+    </form>
+    <form>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text label-prepend" for="class_year"
+            ><b>Year:</b>
+          </label>
+        </div>
+        <input
+          [(ngModel)]="class_year"
+          type="text"
+          class="form-control"
+          id="class_year"
+          name="class_year"
+          [disabled]="true"
+          value="{{ dayClass.classn.year }}"
+        />
+      </div>
+    </form>
+    <form>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text label-prepend" for="teacherSelect"
+            ><b>Teacher: </b>
+          </label>
+        </div>
+        <select
+          class="form-control"
+          id="teacherSelect"
+          aria-describedby="basic-addon3"
+          name="teacherSelect"
+          [(ngModel)]="dayClass.classn.teacher"
+          required
+          [disabled]="true"
+        >
+          <option [ngValue]="dayClass.classn.teacher">
+            {{ dayClass.classn.teacher.first_name }} {{ dayClass.classn.teacher.last_name }}
+          </option>
+        </select>
+      </div>
+    </form>
     <form>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -42,7 +104,6 @@
           </label>
         </div>
         <select
-          [disabled]="!edit"
           class="form-control"
           id="classroomSelect"
           aria-describedby="basic-addon3"
@@ -56,7 +117,7 @@
           </option>
           <option
             *ngFor="let classroom of filteredClassrooms"
-            [value]="classroom.id"
+            [ngValue]="classroom"
           >
             {{ classroom.name }} <i>at</i>
             {{ classroom.location }}
@@ -73,31 +134,15 @@
     >
       {{ feature.feature }}
     </button>
+    <i *ngIf="features.length == 0"> There are no features for this classroom</i>
     <br />
     <b>Capacity:</b> {{ capacity }}/{{ dayClass.classroom.capacity }} <br />
     <button
       type="button"
-      class="btn btn-outline-secondary"
-      *ngIf="!edit"
-      (click)="onEdit()"
-    >
-      Edit
-    </button>
-    <button
-      type="button"
-      class="btn btn-outline-secondary"
-      *ngIf="edit"
-      (click)="onSave()"
+      class="btn btn-outline-secondary margin15"
+      (click)="modal.close(4)"
     >
       Save
-    </button>
-    <button
-      type="button"
-      class="btn btn-outline-secondary"
-      *ngIf="edit"
-      (click)="onEdit()"
-    >
-     Cancel
     </button>
   </div>
   <div class="modal-footer">
@@ -119,7 +164,7 @@
             required
           >
             <option hidden>Choose here</option>
-            <option *ngFor="let student of students" [value]="student.id">
+            <option *ngFor="let student of students" [ngValue]="student">
               {{ student.first_name }} {{ student.last_name }}
             </option>
           </select>
@@ -133,9 +178,6 @@
         Reserve
       </button>
     </div>
-  </div>
-
-  <div class="modal-footer">
     <div class="max-width">
       <b>Delete a reservation:</b> <br />
       <form>
@@ -156,7 +198,7 @@
             <option hidden>Choose here</option>
             <option
               *ngFor="let reservation of reservations"
-              [value]="reservation.id"
+              [ngValue]="reservation"
             >
               {{ reservation.student.first_name }}
               {{ reservation.student.last_name }}
@@ -172,5 +214,16 @@
         Delete
       </button>
     </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+    type="button"
+    class="btn btn-outline-danger"
+    (click)="modal.close(3)"
+  >
+  
+    Delete schedule item
+  </button>
   </div>
 </ng-template>

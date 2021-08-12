@@ -18,6 +18,10 @@ import { StudentModalComponent } from './components/modals/student-modal/student
 import { TeacherModalComponent } from './components/modals/teacher-modal/teacher-modal.component';
 import { AdminModalComponent } from './components/modals/admin-modal/admin-modal.component';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { NewScheduleModalComponent } from './components/modals/new-schedule-modal/new-schedule-modal.component';
+import { ManageUsersComponent } from './components/modals/manage-users/manage-users.component';
+import { ManageClassesComponent } from './components/modals/manage-classes/manage-classes.component';
+import { ManageClassroomsComponent } from './components/modals/manage-classrooms/manage-classrooms.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +36,11 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
     StudentModalComponent,
     TeacherModalComponent,
     AdminModalComponent,
-    FilterPipePipe
+    FilterPipePipe,
+    NewScheduleModalComponent,
+    ManageUsersComponent,
+    ManageClassesComponent,
+    ManageClassroomsComponent
   ],
   imports: [
     BrowserModule,

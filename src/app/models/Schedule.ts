@@ -3,7 +3,7 @@ import { Classroom } from "./Classroom";
 
 export interface Schedule {
     id?: number;
-    date: string;
+    localDate: string;
     localTime: string;
     classroom: Classroom;
     classn: Class;

@@ -1,0 +1,92 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add a new schedule</h4>
+      <button
+        type="button"
+        class="close btn btn-outline-secondary"
+        aria-label="Close"
+        (click)="modal.dismiss()"
+      >
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text label-prepend" for="dateSelect"
+                  ><b>Time: </b>
+                </label>
+              </div>
+              <ngb-timepicker [(ngModel)]="time" name="timepicker" [spinners]="false"></ngb-timepicker>
+          </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text label-prepend" for="dateSelect"
+                      ><b>Date: </b>
+                    </label>
+                  </div>
+                <input class="form-control" required placeholder="yyyy-mm-dd" id="dateSelect"
+                      name="dp" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar btn-calendar" (click)="d.toggle()" type="button"><fa-icon [icon]="faCalendarDay"></fa-icon></button>
+                </div>
+              </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text label-prepend" for="classSelect"
+                  ><b>Class: </b>
+                </label>
+              </div>
+              <select
+                class="form-control form-select"
+                size="3"
+                id="classSelect"
+                aria-describedby="basic-addon3"
+                name="classSelect"
+                [(ngModel)]="selectedClass"
+                required
+              >
+                <option
+                  *ngFor="let class of classes"
+                  [ngValue]="class"
+                >
+                  {{ class.name }}
+                </option>
+              </select>
+            </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text label-prepend" for="classroomSelect"
+              ><b>Classroom: </b>
+            </label>
+          </div>
+          <select
+            class="form-control form-select"
+            size="3"
+            id="classroomSelect"
+            aria-describedby="basic-addon3"
+            name="classroomSelect"
+            [(ngModel)]="selectedClassroom"
+            required
+          >
+            <option
+              *ngFor="let classroom of classrooms"
+              [ngValue]="classroom"
+            >
+              {{ classroom.name }} <i>at</i>
+              {{ classroom.location }}
+            </option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-outline-secondary"
+          (click)="modal.close()"
+        >
+          Add
+        </button>
+      </form>
+     </div>
+  </ng-template>
+  

@@ -11,7 +11,7 @@
       <b>Year:</b> {{dayClass.classn.year}} <br>
       <b>Teacher:</b> {{dayClass.classn.teacher.first_name}} {{dayClass.classn.teacher.last_name}} <br>
       <b>Classroom:</b> {{dayClass.classroom.name}} <i>at</i> {{dayClass.classroom.location}} <br>
-      <b>Features:</b><button type="button" class="btn btn-outline-secondary btn-sm feature-btn" disabled *ngFor="let feature of features"> {{feature.feature}} </button> <br>
+      <b>Features:</b><i *ngIf="features.length == 0"> There are no features for this classroom</i><button type="button" class="btn btn-outline-secondary btn-sm feature-btn" disabled *ngFor="let feature of features"> {{feature.feature}} </button> <br>
       <b>Capacity:</b> {{capacity}}/{{dayClass.classroom.capacity}}
     </div>
   <div class="modal-footer">
@@ -24,7 +24,7 @@
         </div>
         <select class="form-control" id="studentsSelect" aria-describedby="basic-addon3" name="studentSelect" [(ngModel)]="selectedStudent" required>
           <option hidden>Choose here</option>
-          <option *ngFor="let student of students" [value]="student.id"> {{student.first_name}} {{student.last_name}}</option>
+          <option *ngFor="let student of students" [ngValue]="student"> {{student.first_name}} {{student.last_name}}</option>
         </select>
       </div>
     </form>

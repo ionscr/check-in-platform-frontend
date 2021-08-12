@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { RefreshService } from 'src/app/services/refresh.service';
 
 @Component({
   selector: 'app-student-modal',
@@ -33,16 +34,16 @@ export class StudentModalComponent implements OnInit {
   faTimes=faTimes;
   studentOk: number = 1;
 
-  constructor(private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService) { }
+  constructor(private refreshService: RefreshService ,private modalService: NgbModal, private userService: UserService, private reservationsService: ReservationsService) { }
 
   ngOnInit(): void {
     this.eventsSubsription = this.events.subscribe(() => this.openModal(this.content));
-    this.getStudents();
   }
   ngOnDestroy(){
     this.eventsSubsription.unsubscribe();
   }
   openModal(content: TemplateRef<any>): void {
+    this.getStudents();
     this.modalService.open(content, { centered: true }).result.then( () => {this.addReservation(this.selectedStudent); }, () => {});
   }
   getStudents(): void {
@@ -54,12 +55,11 @@ export class StudentModalComponent implements OnInit {
     } 
     else{
       this.studentOk = 1;
-      const student1: User = {id: Number(JSON.stringify(student).match(/\d/g)), first_name: "", last_name: "", role: 1};
       this.reservations.forEach(reservation => {
-        if(reservation.student.id === student1.id) this.studentOk = 0;
+        if(reservation.student.id === student.id) this.studentOk = 0;
       });
       if(this.studentOk){
-        const reservation: Reservations = {schedule: this.dayClass, student: student1}
+        const reservation: Reservations = {schedule: this.dayClass, student: student}
         this.reservationsService.addReservation(reservation).subscribe((reservation) => (this.reservations.push(reservation), this.capacity = this.reservations.length));
         this.newReservationEvent.emit(1);
       }
@@ -67,6 +67,7 @@ export class StudentModalComponent implements OnInit {
         alert("This student already has a reservation!");
       }
     }
+    this.refreshService.setRefresh(true);
+    this.refreshService.setRefresh(false);
   }
-
 }

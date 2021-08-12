@@ -6,5 +6,5 @@ export interface User {
     year?: number;
     department?: string;
     section?: string;
-    f_group?: string;
+    group?: string;
   }

@@ -3,11 +3,11 @@
     <thead>
       <tr>
         <th scope="col" class="width10">{{ monday }} - {{friday}} <br> <button type="button" (click)="onBackwards()" class="btn btn-outline-secondary margin15" [disabled]="weekNr==0"><fa-icon [icon]="faBackward"></fa-icon></button>  <button type="button" class="btn btn-outline-secondary" (click)="onForward()"><fa-icon [icon]="faForward"></fa-icon></button></th>
-        <th scope="col" class="width18">Monday <br> <button *ngIf="role=='teacher' || role=='admin'" type="button" (click)="onPlus(0)" class="btn btn-outline-secondary" ><fa-icon [icon]="faPlus"></fa-icon></button></th>
-        <th scope="col" class="width18">Tuesday <br> <button *ngIf="role=='teacher' || role=='admin'" type="button" (click)="onPlus(1)" class="btn btn-outline-secondary" ><fa-icon [icon]="faPlus"></fa-icon></button></th>
-        <th scope="col" class="width18">Wednesday <br> <button *ngIf="role=='teacher' || role=='admin'" type="button" (click)="onPlus(2)" class="btn btn-outline-secondary" ><fa-icon [icon]="faPlus"></fa-icon></button></th>
-        <th scope="col" class="width18">Thursday <br> <button *ngIf="role=='teacher' || role=='admin'" type="button" (click)="onPlus(3)" class="btn btn-outline-secondary" ><fa-icon [icon]="faPlus"></fa-icon></button></th>
-        <th scope="col" class="width18">Friday <br> <button *ngIf="role=='teacher' || role=='admin'" type="button" (click)="onPlus(4)" class="btn btn-outline-secondary" ><fa-icon [icon]="faPlus"></fa-icon></button></th>
+        <th scope="col" class="width18">Monday</th>
+        <th scope="col" class="width18">Tuesday</th>
+        <th scope="col" class="width18">Wednesday</th>
+        <th scope="col" class="width18">Thursday</th>
+        <th scope="col" class="width18">Friday</th>
       </tr>
     </thead>
   </table>

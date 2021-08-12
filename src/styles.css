@@ -9,3 +9,40 @@
     background: transparent !important;
     padding: 0.5rem 1rem 0.5rem 0 !important;
 }
+.input-group-prepend{
+    min-width: 35%;
+    max-width: 35%;
+    white-space: normal;
+    word-wrap: break-word;
+}
+.input-group-prepend label{
+    white-space: normal;
+    word-wrap: break-word;
+}
+.labelclass{
+    min-width: 35%;
+    max-width: 35%;
+    white-space: normal;
+    word-wrap: break-word;
+}
+.margin15{
+    margin-right: 15px;
+}
+.btn-calendar{
+    height: 100%;
+    border-radius: 0 0.5rem 0.5rem 0 !important;
+}
+.card{
+    margin-bottom:20px;
+}
+.table-responsive{
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+td{
+    padding: 20px;
+    vertical-align: top;
+}
+.width100{
+    width: 100%;
+}

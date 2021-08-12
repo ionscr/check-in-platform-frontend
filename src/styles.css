@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+
 .feature-btn{
     margin-left: 5px;
     margin-right: 5px;
@@ -45,4 +47,14 @@ td{
 }
 .width100{
     width: 100%;
+}
+.adm-btn{
+    margin-top:5px;
+}
+.dropdown{
+    display: inline;
+}
+.manage-div{
+    display:flex;
+    justify-content: flex-end;
 }

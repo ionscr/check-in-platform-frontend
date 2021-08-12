@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RoleService } from 'src/app/services/role.service';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
 import { RefreshService } from 'src/app/services/refresh.service';
 @Component({
@@ -15,6 +15,7 @@ export class RoleSelectorComponent implements OnInit {
   newClassroomEventSubject: Subject<void> = new Subject<void>();
   role: string = "guest";
   refresh: boolean = false;
+  faCalendarPlus=faCalendarPlus;
   constructor(private roleService: RoleService, private refreshService: RefreshService, private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
